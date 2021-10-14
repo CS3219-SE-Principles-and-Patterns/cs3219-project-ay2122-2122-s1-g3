@@ -24,6 +24,11 @@ export class Signup extends React.Component {
               />
             </div>
           </div>
+          <div className="login-button">
+            <button type="button" className="btn">
+              Sign up
+            </button>
+          </div>
         </div>
       </div>
     );
