@@ -15,44 +15,54 @@ function Signup(props) {
   };
 
   return (
-    <div className="container">
-      <div className="title"> Sign up </div>
-      <div className="content">
-        <div className="form">
-          <div className="sub-form">
-            <label htmlFor="username">Username</label>
-            <input type="text" {...username} autoComplete="new-password" />
+    <div className="Signup">
+      <div className="peer-prep">
+        <h1>PeerPrep</h1>
+        <h3>See your growth and get support</h3>
+      </div>
+      <div className="container">
+        <div className="title"> Sign up </div>
+        <div className="content">
+          <div className="form">
+            <div className="sub-form">
+              <label htmlFor="username">Username</label>
+              <input type="text" {...username} autoComplete="new-password" />
+            </div>
+            <div className="sub-form">
+              <label htmlFor="email">Email</label>
+              <input type="text" {...email} autoComplete="new-password" />
+            </div>
+            <div className="sub-form">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                {...password}
+                autoComplete="new-password"
+              />
+            </div>
+            <div className="sub-form">
+              <label htmlFor="confirm-password">Confirm Password</label>
+              <input
+                type="password"
+                {...confirmPassword}
+                autoComplete="new-password"
+              />
+            </div>
+            {error && (
+              <>
+                <small style={{ color: "red" }}>{error}</small>
+                <br />
+              </>
+            )}
           </div>
-          <div className="sub-form">
-            <label htmlFor="email">Email</label>
-            <input type="text" {...email} autoComplete="new-password" />
-          </div>
-          <div className="sub-form">
-            <label htmlFor="password">Password</label>
-            <input type="password" {...password} autoComplete="new-password" />
-          </div>
-          <div className="sub-form">
-            <label htmlFor="confirm-password">Confirm Password</label>
+          <div className="login-button">
             <input
-              type="password"
-              {...confirmPassword}
-              autoComplete="new-password"
+              type="button"
+              value={loading ? "Loading..." : "Signup"}
+              onClick={handleSignup}
+              disabled={loading}
             />
           </div>
-          {error && (
-            <>
-              <small style={{ color: "red" }}>{error}</small>
-              <br />
-            </>
-          )}
-        </div>
-        <div className="login-button">
-          <input
-            type="button"
-            value={loading ? "Loading..." : "Signup"}
-            onClick={handleSignup}
-            disabled={loading}
-          />
         </div>
       </div>
     </div>
