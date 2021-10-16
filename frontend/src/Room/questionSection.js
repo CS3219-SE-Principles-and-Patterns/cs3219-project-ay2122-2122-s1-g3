@@ -20,7 +20,6 @@ export const QuestionSection = () => {
                     You are given n​​​​​​ tasks labeled from 0 to n - 1 represented by a 2D integer array tasks, where tasks[i] = [enqueueTimei, processingTimei] means that the i​​​​​​th​​​​ task will be available to process at enqueueTimei and will take processingTimei to finish processing.
                     </h6>
                 </div>
-                
             </div>
             <Video />
         </div>

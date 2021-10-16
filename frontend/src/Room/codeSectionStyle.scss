@@ -6,12 +6,14 @@
     flex-direction: column;
     justify-content: start;
 
-    //margin: 10%;
     .codeHeader {
-        margin: 10%;
+        margin: 10% 10% 10px 10%;
         .nextButtonWrapper {
             text-align: end;
         }
+    }
+    .terminalHeader{
+        margin-top: 30px;
     }
     
 

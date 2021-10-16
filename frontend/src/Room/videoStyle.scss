@@ -1,0 +1,22 @@
+.Video {
+    margin: 20px;
+    height: 25%;
+    .cameraFeed {
+        background-color: black;
+        display: inline-flex;
+        width:50%;
+        height:90%;
+        border-radius: 20px;
+        color: white;
+        align-items: center;
+        justify-content: center;
+    }
+    .leftButtons{
+        display: inline-flex;
+        flex-direction: column;
+    }
+    .rightButtons{
+        display: inline-flex;
+        flex-direction: column;
+    }
+}

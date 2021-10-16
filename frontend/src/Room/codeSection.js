@@ -18,6 +18,9 @@ export const CodeSection = () => {
             </div>
 
             <Editor />
+            <h5 className="terminalHeader">
+                Standard Output
+            </h5>
             <Terminal />
         </div>
     )

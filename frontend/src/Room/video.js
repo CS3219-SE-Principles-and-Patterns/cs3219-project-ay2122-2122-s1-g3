@@ -2,7 +2,22 @@ import "./videoStyle.scss"
 export const Video = () => {
     return (
         <div className="Video">
-            <h1>VIDEO</h1>
+            <div className="leftButtons">
+                <button type="button" className="btn">
+                    Video
+                </button>
+                <button type="button" className="btn">
+                    Microphone
+                </button>
+            </div>
+            <div className="cameraFeed">
+                Rollrollfaraway video
+            </div>
+            <div className="rightButtons">
+                <button type="button" className="btn">
+                    Smiley
+                </button>
+            </div>
         </div>
     )
 }
