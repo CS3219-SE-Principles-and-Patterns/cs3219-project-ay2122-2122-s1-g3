@@ -1,0 +1,18 @@
+.CodeSection {
+    background-color: #4E555D;
+    color: white;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    //margin: 10%;
+    .codeHeader {
+        margin: 10%;
+        .nextButtonWrapper {
+            text-align: end;
+        }
+    }
+    
+
+}

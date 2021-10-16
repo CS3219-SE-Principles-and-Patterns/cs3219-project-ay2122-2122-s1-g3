@@ -1,0 +1,19 @@
+.QuestionSection {
+    background-color: #E7EBF0;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .questionPortion {
+        margin: 10%;
+        .questionHeader {
+            .nextButtonWrapper {
+                text-align: end;
+                margin-bottom: 10%;
+            }
+        }
+        .questionBody {
+            margin-top: 10px;
+        }
+    }
+}
