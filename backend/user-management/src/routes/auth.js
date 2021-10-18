@@ -7,16 +7,8 @@ const {
   generateToken,
   getCleanUser,
   handleResponse,
+  verifyToken,
 } = require("../utils/utils");
-
-// static user details
-// const userData = {
-//   userId: "789789",
-//   password: "123",
-//   email: "cluemediator@gmail.com",
-//   username: "galvin",
-//   isAdmin: true,
-// };
 
 router.post("/signup", function (request, response, next) {
   const bodyData = request.body;
@@ -111,15 +103,33 @@ router.get("/verifyToken", function (request, response) {
     return handleResponse(request, response, 400, null, "Token required.");
   }
 
-  // Check token that was passed by decoding token using secret
-  jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-    if (err) {
-      return handleResponse(request, response, 401, null, "Token invalid.");
-    }
-  });
+  // // Check token that was passed by decoding token using secret
+  // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+  //   if (err) {
+  //     return handleResponse(request, response, 401, null, "Token invalid.");
+  //   }
+  // });
 
-  const userObj = getCleanUser(userData);
-  return response.json({ user: userObj, token });
+  // // const userObj = getCleanUser(userData);
+  // return response.json({ user: userObj, token });
+  verifyToken(token, async (err, payload) => {
+    if (err) {
+      return handleResponse(request, response, 401);
+    }
+
+    const userData = await User.findOne().where("_id").equals(payload.id);
+    // get basic user details
+    const userObj = getCleanUser(userData);
+    // generate access token
+    const tokenObj = generateToken(userData);
+
+    // return the token along with user details
+    return handleResponse(request, response, 200, {
+      user: userObj,
+      token: tokenObj.token,
+      expiredAt: tokenObj.expiredAt,
+    });
+  });
 });
 
 module.exports = router;

@@ -15,7 +15,7 @@ function generateToken(user) {
   const userData = getCleanUser(user);
 
   const token = jwt.sign(userData, process.env.JWT_SECRET, {
-    expiresIn: 60 * 60 * 24, // Expires in 24 hours
+    expiresIn: process.env.ACCESS_TOKEN_LIFE, // Expires in 24 hours
   });
 
   // expiry time of the access token
@@ -37,6 +37,11 @@ function getCleanUser(user) {
     username: user.username,
     isAdmin: user.isAdmin,
   };
+}
+
+// verify access token and refresh token
+function verifyToken(token, func) {
+  jwt.verify(token, process.env.JWT_SECRET, func);
 }
 
 // Handle API response
@@ -73,4 +78,5 @@ module.exports = {
   generateToken,
   getCleanUser,
   handleResponse,
+  verifyToken,
 };
