@@ -4,10 +4,9 @@ import { BrowserRouter, Switch, NavLink } from "react-router-dom";
 import Home from "./Screen/Home";
 import Login from "./Screen/Login";
 import Signup from "./Screen/Signup";
-import {Room} from "./Room/room"
+import {Room} from "./Screen/Room"
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 // A header containing all current screens
 // for displaying purpose

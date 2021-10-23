@@ -1,6 +1,6 @@
-import "./roomStyle.scss"
-import {QuestionSection} from "./questionSection"
-import {CodeSection} from "./codeSection"
+import "../Style/roomStyle.scss"
+import {QuestionSection} from "../Room/questionSection"
+import {CodeSection} from "../Room/codeSection"
 
 export const Room = () => {
     return (
