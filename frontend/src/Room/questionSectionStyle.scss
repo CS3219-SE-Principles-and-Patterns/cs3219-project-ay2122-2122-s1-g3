@@ -31,9 +31,22 @@
                     background-color: #c8cccf;
                   }
             }
+            .questionTitle {
+                font-family: "Montserrat";
+                font-weight: 600;
+                font-size: 24px;
+                color: #4e555d;
+            }
         }
         .questionBody {
             margin-top: 10px;
+            .questionDescription {
+                font-family: "Montserrat";
+                font-size: 15px;
+                letter-spacing: 1px;
+                color: #4e555d;
+                font-weight: 600;
+            }
         }
     }
 }
