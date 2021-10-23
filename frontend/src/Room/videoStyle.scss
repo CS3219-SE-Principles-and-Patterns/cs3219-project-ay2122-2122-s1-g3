@@ -1,6 +1,8 @@
 .Video {
     margin: 20px;
     height: 25%;
+    display: flex;
+    justify-content: center;
     .cameraFeed {
         background-color: black;
         display: inline-flex;
