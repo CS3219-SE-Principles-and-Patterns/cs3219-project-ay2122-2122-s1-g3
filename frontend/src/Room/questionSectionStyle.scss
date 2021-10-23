@@ -10,7 +10,26 @@
         .questionHeader {
             .nextButton {
                 text-align: end;
-                margin-bottom: 10%;
+                input {
+                    font-weight: 600;
+                    font-family: "Montserrat";
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                    color: #4e555d;
+                    min-width: 4rem;
+                    height: 45px;
+                    padding: 0px 20px;
+                    background-color: #E7EBF0;
+                    border: 3px rgba($color: #FFFFFF, $alpha: 0.40);
+                    border-style: outset;
+                    border-radius: 10px;
+                    margin-top: 10px;
+                    margin-bottom: 31px;
+                    cursor: pointer;
+                  }
+                  input:hover {
+                    background-color: #c8cccf;
+                  }
             }
         }
         .questionBody {
