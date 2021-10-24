@@ -1,5 +1,4 @@
 import "./videoStyle.scss";
-import { IconContext } from "react-icons";
 import {FaVideo, FaMicrophone, FaRegLaugh} from "react-icons/fa";
 export const Video = () => {
   return (
