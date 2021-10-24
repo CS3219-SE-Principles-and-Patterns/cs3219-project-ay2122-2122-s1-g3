@@ -1,10 +1,9 @@
-import "./terminalStyle.scss"
+import "./terminalStyle.scss";
 export const Terminal = () => {
-    return (
-        <div className="Terminal">
-            <div className="stdOutput">
-
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="Terminal">
+      <div className="stdOutput">
+      </div>
+    </div>
+  );
+};

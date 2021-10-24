@@ -9,10 +9,10 @@ export const CodeSection = () => {
         <div className="nextButtonWrapper">
           <button>Exit</button>
         </div>
-        <h3 className="questionTitle">Your Code</h3>
+        <div className="questionTitle">Your Code</div>
       </div>
       <Editor />
-      <h5 className="terminalHeader">Standard Output</h5>
+      <div className="terminalHeader">Standard Output</div>
       <Terminal />
     </div>
   );
