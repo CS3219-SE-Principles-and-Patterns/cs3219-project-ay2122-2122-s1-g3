@@ -1,29 +1,21 @@
 import "./videoStyle.scss";
+import {FaVideo, FaMicrophone, FaRegLaugh} from "react-icons/fa";
 export const Video = () => {
   return (
     <div className="Video">
       <div className="leftButtons">
-        <div className="videoButton">
-          <input
-            type="button"
-            value="Video"
-          />
-        </div>
-        <div className="microphoneButton">
-          <input
-            type="button"
-            value="Microphone"
-          />
-        </div>
+        <button className="videoButton">
+          <FaVideo />
+        </button>
+        <button className="microhphoneButton">
+          <FaMicrophone />
+        </button>
       </div>
       <div className="cameraFeed">Rollrollfaraway video</div>
       <div className="rightButtons">
-        <div className="smileyButton">
-          <input
-            type="button"
-            value="Smiley"
-          />
-        </div>
+      <button className="smileyButton">
+          <FaRegLaugh />
+        </button>
       </div>
     </div>
   );
