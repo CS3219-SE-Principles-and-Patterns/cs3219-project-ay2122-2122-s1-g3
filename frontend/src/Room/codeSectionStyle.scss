@@ -10,10 +10,39 @@
         margin: 10% 10% 10px 10%;
         .nextButtonWrapper {
             text-align: end;
+            button{
+                font-weight: 600;
+                font-family: "Montserrat";
+                font-size: 16px;
+                letter-spacing: 1px;
+                color: #FFFFFF;
+                min-width: 4rem;
+                height: 45px;
+                padding: 0px 20px;
+                background-color: #FF4A32;
+                border: 3px rgba($color: #FFFFFF, $alpha: 0.40);
+                border-style: outset;
+                border-radius: 10px;
+                margin-top: 10px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #b33322;
+            }
+        }
+        .questionTitle {
+            font-family: "Montserrat";
+            font-weight: 600;
+            font-size: 24px;
+            color: #FFFFFF;
         }
     }
     .terminalHeader{
-        margin-top: 30px;
+        margin: 10% 10% 10px 10%;
+        font-family: "Montserrat";
+        font-weight: 600;
+        font-size: 24px;
+        color: #FFFFFF;
     }
     
 
