@@ -1,5 +1,5 @@
 // root path
-const socket = io("/");
+const socket = io("http://localhost:5000");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer(undefined, {
   host: "/",
