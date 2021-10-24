@@ -5,11 +5,8 @@ export const QuestionSection = () => {
     <div className="QuestionSection">
       <div className="questionPortion">
         <div className="questionHeader">
-          <div className="nextButton">
-            <input
-              type="button"
-              value="Next"
-            />
+          <div className="nextButtonWrapper">
+            <button>Next</button>
           </div>
           <h3 className="questionTitle">Single Threaded CPU</h3>
         </div>

@@ -8,9 +8,9 @@
     .questionPortion {
         margin: 10%;
         .questionHeader {
-            .nextButton {
+            .nextButtonWrapper {
                 text-align: end;
-                input {
+                button{
                     font-weight: 600;
                     font-family: "Montserrat";
                     font-size: 16px;
@@ -26,11 +26,12 @@
                     margin-top: 10px;
                     margin-bottom: 31px;
                     cursor: pointer;
-                  }
-                  input:hover {
+                }
+                  button:hover {
                     background-color: #f5f5f5;
-                  }
+                }
             }
+
             .questionTitle {
                 font-family: "Montserrat";
                 font-weight: 600;
