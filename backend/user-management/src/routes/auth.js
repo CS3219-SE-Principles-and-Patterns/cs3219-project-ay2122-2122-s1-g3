@@ -28,21 +28,11 @@ router.post("/signup", async function (request, response, next) {
   }
 
   // Cannot have same username
-  const userData = await User.findOne()
-    .where("username")
-    .equals(bodyData.username);
+  const userData = await User.findOne().where("email").equals(bodyData.email);
 
   if (userData) {
-    return handleResponse(request, response, 400, null, "Username exists");
+    return handleResponse(request, response, 400, null, "Email exists");
   }
-
-  // const hash = await bcrypt.hash(
-  //   bodyData["password"],
-  //   process.env.SALT_FACTOR,
-  //   async function (err, hash) {
-  //     return hash;
-  //   }
-  // );
 
   const hash = await bcrypt
     .hash(bodyData["password"], 10)
@@ -65,7 +55,7 @@ router.post("/signup", async function (request, response, next) {
 router.post("/signin", async function (request, response) {
   // Return 400 status if either field is empty
   if (
-    !request.body.hasOwnProperty("username") ||
+    !request.body.hasOwnProperty("email") ||
     !request.body.hasOwnProperty("password")
   ) {
     return handleResponse(
@@ -73,21 +63,21 @@ router.post("/signin", async function (request, response) {
       response,
       400,
       null,
-      "Username and Password required."
+      "Email and Password required."
     );
   }
 
-  const username = request.body.username;
+  const email = request.body.email;
   const password = request.body.password;
 
-  const userData = await User.findOne().where("username").equals(username);
+  const userData = await User.findOne().where("email").equals(email);
   if (!userData) {
     return handleResponse(
       request,
       response,
       401,
       null,
-      "Username or Password is invalid."
+      "Email or Password is invalid."
     );
   }
 
@@ -105,7 +95,7 @@ router.post("/signin", async function (request, response) {
       response,
       401,
       null,
-      "Username or Password is invalid."
+      "Email or Password is invalid."
     );
   }
 
