@@ -704,7 +704,7 @@ parcelRequire = (function (e, r, t, n) {
         "use strict";
         Object.defineProperty(exports, "__esModule", { value: !0 }),
           (exports.shimGetUserMedia = i);
-        var e = t(require("../utils.js"));
+        var e = t(require("../utils.js.js"));
         function r() {
           if ("function" != typeof WeakMap) return null;
           var e = new WeakMap();
@@ -993,7 +993,7 @@ parcelRequire = (function (e, r, t, n) {
               return r.shimGetDisplayMedia;
             },
           });
-        var e = i(require("../utils.js")),
+        var e = i(require("../utils.js.js")),
           t = require("./getusermedia"),
           r = require("./getdisplaymedia");
         function n() {
@@ -5246,7 +5246,7 @@ parcelRequire = (function (e, r, t, n) {
         "use strict";
         Object.defineProperty(exports, "__esModule", { value: !0 }),
           (exports.default = void 0);
-        var e = require("./adapter_factory.js"),
+        var e = require("./adapter_factory.js.js"),
           r = (0, e.adapterFactory)({ window: window }),
           t = r;
         exports.default = t;

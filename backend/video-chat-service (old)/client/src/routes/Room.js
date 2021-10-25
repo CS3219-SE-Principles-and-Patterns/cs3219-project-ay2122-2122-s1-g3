@@ -34,7 +34,7 @@ const Room = (props) => {
 
         socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
       });
-  }, []);
+  });
 
   function callUser(userID) {
     peerRef.current = createPeer(userID);

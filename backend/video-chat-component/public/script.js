@@ -1,15 +1,11 @@
-// root path
-const socket = io("http://localhost:5000");
+const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer(undefined, {
   host: "/",
   port: "3001",
 });
 const myVideo = document.createElement("video");
-
-// mute client audio
 myVideo.muted = true;
-// connected peers
 const peers = {};
 navigator.mediaDevices
   .getUserMedia({
@@ -28,13 +24,11 @@ navigator.mediaDevices
     });
 
     socket.on("user-connected", (userId) => {
-      console.log("User connected:", userId);
       connectToNewUser(userId, stream);
     });
   });
 
 socket.on("user-disconnected", (userId) => {
-  console.log("User disconnected:", userId);
   if (peers[userId]) peers[userId].close();
 });
 
