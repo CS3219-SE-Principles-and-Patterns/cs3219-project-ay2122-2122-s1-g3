@@ -5,6 +5,7 @@ node_modules
 node_modules.nosync/
 .pnp/
 .pnp.js
+.DS_Store
 
 # testing
 coverage/
