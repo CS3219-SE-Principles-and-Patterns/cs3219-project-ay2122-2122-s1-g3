@@ -9,7 +9,7 @@ const {
   getOrSetCache,
 } = require("../utils/utils");
 
-router.post("/signup", function (request, response, next) {
+router.post("/signup", async function (request, response, next) {
   const bodyData = request.body;
 
   if (
@@ -24,6 +24,15 @@ router.post("/signup", function (request, response, next) {
       null,
       "Username and Password and Email required."
     );
+  }
+
+  // Cannot have same username
+  const userData = await User.findOne()
+    .where("username")
+    .equals(bodyData.username);
+
+  if (userData) {
+    return handleResponse(request, response, 400, null, "Username exists");
   }
 
   bodyData["isAdmin"] = false;
@@ -54,7 +63,6 @@ router.post("/signin", async function (request, response) {
   const username = request.body.username;
   const password = request.body.password;
 
-  // MongoDB query is need to get the username and password
   const userData = await User.findOne()
     .where("username")
     .equals(username)
