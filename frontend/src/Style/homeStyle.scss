@@ -10,7 +10,31 @@
         height: 30%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: start;
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            button{
+                font-weight: 600;
+                font-family: "Montserrat";
+                font-size: 20px;
+                letter-spacing: 1px;
+                color: #4E555D;
+                min-width: 4rem;
+                height: 45px;
+                padding: 0px 20px;
+                background-color: #E7EBF0;
+                border: 3px rgba($color: #FFFFFF, $alpha: 0.80);
+                border-style: outset;
+                border-radius: 10px;
+                margin:10px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #FFFFFF;
+            }
+        }
         .brandName{
             font-family: "Nanum Pen Script";
             font-size: 5rem;

@@ -11,16 +11,28 @@ function Home(props) {
 
   // handle submission of form
   const handleSubmit = (e) => {
-    console.log(difficulty.value);
-    console.log(category.value);
-    console.log(language.value);
     props.history.push("/room");
     e.preventDefault();
+  };
+
+  // handle click event of logout button
+  const handleLogout = () => {
+    removeUserSession();
+    props.history.push("/login");
+  };
+
+  // handle click event of logout button
+  const handleProfile = () => {
+    props.history.push("/profile");
   };
 
   return (
     <div className="Home">
       <div className="homeHeader">
+        <div className="buttons">
+          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleProfile}>Profile</button>
+        </div>
         <div className="brandName">PeerPrep</div>
       </div>
       <div className="homeBody">
