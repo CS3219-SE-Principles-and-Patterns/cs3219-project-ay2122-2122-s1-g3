@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
+
+.Home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    .homeHeader {
+        background-color: #E7EBF0;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            button{
+                font-weight: 600;
+                font-family: "Montserrat";
+                font-size: 20px;
+                letter-spacing: 1px;
+                color: #4E555D;
+                min-width: 4rem;
+                height: 45px;
+                padding: 0px 20px;
+                background-color: #E7EBF0;
+                border: 3px rgba($color: #FFFFFF, $alpha: 0.80);
+                border-style: outset;
+                border-radius: 10px;
+                margin:10px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #FFFFFF;
+            }
+        }
+        .brandName{
+            font-family: "Nanum Pen Script";
+            font-size: 5rem;
+            font-weight: 200;
+            color: #4E555D;
+            text-align: center;
+        }
+    }
+    .homeBody {
+        background-color: #4E555D;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        color: #E7EBF0;
+        font-family: "Montserrat";
+        font-size: 15px;
+        letter-spacing: 1px;
+        font-weight: 500;
+        label{
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        select{
+            height:3rem;
+            width: 15rem;
+            text-align: center;
+            font-family: "Montserrat";
+            background-color: #E7EBF0;
+            border: 3px rgba($color: #FFFFFF, $alpha: 0.80);
+            border-style: outset;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #4E555D;
+            cursor: pointer;
+        }
+        select:hover {
+            background-color: #FFFFFF;
+        }
+        button{
+            display:block;
+            font-weight: 600;
+            font-family: "Montserrat";
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+            min-width: 15rem;
+            height: 45px;
+            padding: 0px 20px;
+            background-color: #4E555D;
+            border: 3px rgba($color: #FFFFFF, $alpha: 0.40);
+            border-style: outset;
+            border-radius: 10px;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2a2e33;
+        }
+
+
+    }
+}
