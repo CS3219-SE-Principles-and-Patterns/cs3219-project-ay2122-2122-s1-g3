@@ -113,14 +113,11 @@ router.get("/verifyToken", function (request, response) {
     const userData = await User.findOne().where("_id").equals(payload.id);
     // get basic user details
     const userObj = getCleanUser(userData);
-    // generate access token
-    const tokenObj = generateToken(userData);
 
     // return the token along with user details
     return handleResponse(request, response, 200, {
       user: userObj,
-      token: tokenObj.token,
-      expiredAt: tokenObj.expiredAt,
+      token: token,
     });
   });
 });
