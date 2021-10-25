@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const User = require("../model/user-model");
 const {
@@ -35,9 +36,25 @@ router.post("/signup", async function (request, response, next) {
     return handleResponse(request, response, 400, null, "Username exists");
   }
 
+  // const hash = await bcrypt.hash(
+  //   bodyData["password"],
+  //   process.env.SALT_FACTOR,
+  //   async function (err, hash) {
+  //     return hash;
+  //   }
+  // );
+
+  const hash = await bcrypt
+    .hash(bodyData["password"], 10)
+    .then((hash) => {
+      return hash;
+    })
+    .catch((err) => console.error(err));
+
+  bodyData["password"] = hash;
   bodyData["isAdmin"] = false;
 
-  User.create(request.body, function (err, post) {
+  User.create(bodyData, function (err, post) {
     if (err) {
       return next(err);
     }
@@ -63,25 +80,26 @@ router.post("/signin", async function (request, response) {
   const username = request.body.username;
   const password = request.body.password;
 
-  const userData = await User.findOne()
-    .where("username")
-    .equals(username)
-    .where("password")
-    .equals(password);
+  const userData = await User.findOne().where("username").equals(username);
+  if (!userData) {
+    return handleResponse(
+      request,
+      response,
+      401,
+      null,
+      "Username or Password is invalid."
+    );
+  }
 
   // Return 401 status if credential is not matched
-  if (userData != null) {
-    if (username !== userData.username || password != userData.password) {
-      // Change userData to get from MongoDB
-      return handleResponse(
-        request,
-        response,
-        401,
-        null,
-        "Username or Password is invalid."
-      );
-    }
-  } else {
+  const isValid = await bcrypt
+    .compare(password, userData.password)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => console.error(err));
+
+  if (!isValid) {
     return handleResponse(
       request,
       response,
