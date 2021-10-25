@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { setUserSession } from "../Utils/Common";
 import "../Style/LoginSignup.scss";
 
 function Signup(props) {
@@ -11,7 +13,23 @@ function Signup(props) {
 
   // handle button click of signup form
   const handleSignup = () => {
-    props.history.push("/home");
+    axios
+      .post("", {
+        email: email.value,
+        password: password.value,
+        username: username.value,
+      })
+      .then((response) => {
+        setLoading(false);
+        setUserSession(response.data.token, response.data.user);
+        props.history.push("/home");
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.response.status === 401)
+          setError(error.response.data.message);
+        else setError("Something went wrong.");
+      });
   };
 
   return (

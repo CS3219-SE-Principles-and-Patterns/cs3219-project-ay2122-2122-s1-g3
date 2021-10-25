@@ -1,5 +1,5 @@
 import "./videoStyle.scss";
-import {FaVideo, FaMicrophone, FaRegLaugh} from "react-icons/fa";
+import { FaVideo, FaMicrophone, FaRegLaugh } from "react-icons/fa";
 export const Video = () => {
   return (
     <div className="Video">
@@ -14,7 +14,7 @@ export const Video = () => {
       <div className="cameraFeed">Your video</div>
       <div className="cameraFeed">Rollrollfaraway video</div>
       <div className="rightButtons">
-      <button className="smileyButton">
+        <button className="smileyButton">
           <FaRegLaugh />
         </button>
       </div>

@@ -4,7 +4,8 @@ import { BrowserRouter, Switch, NavLink } from "react-router-dom";
 import Home from "./Screen/Home";
 import Login from "./Screen/Login";
 import Signup from "./Screen/Signup";
-import {Room} from "./Screen/Room"
+import { Room } from "./Screen/Room";
+import Profile from "./Screen/Profile";
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 
@@ -16,31 +17,32 @@ function App() {
       <BrowserRouter>
         <div>
           <div className="header">
-            <NavLink exact activeClassName="active" to="/home">
-              Home
-            </NavLink>
-            <small>(Access with token only)</small>
             <NavLink activeClassName="active" to="/login">
               Login
             </NavLink>
-            <small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/signup">
               Signup
             </NavLink>
-            <small>(Access without token only)</small>
-            <small>(Access without token only)</small>
+            <NavLink exact activeClassName="active" to="/home">
+              Home
+            </NavLink>
             <NavLink activeClassName="active" to="/room">
               Room
             </NavLink>
-            <small>(Access without token only)</small>
+            <NavLink activeClassName="active" to="/profile">
+              Profile
+            </NavLink>
           </div>
           <div className="content">
             <Switch>
-              <PrivateRoute path="/home" component={Home} />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
+              {/* <PrivateRoute path="/home" component={Home} /> */}
+              <PublicRoute path="/home" component={Home} />
               <PublicRoute path="/room" component={Room} />
-
+              {/* <PrivateRoute path="/room" component={Room} /> */}
+              <PublicRoute path="/profile" component={Profile} />
+              {/* <PrivateRoute path="/profile" component={Profile} /> */}
             </Switch>
           </div>
         </div>
