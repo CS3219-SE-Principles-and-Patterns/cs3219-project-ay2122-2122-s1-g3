@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  user-management-redis:
+    container_name: user-management-redis
+    image: "redis:latest"
+    expose:
+      - 6379
+    networks:
+      - user-management-network
+  user-db:
+    container_name: user-db
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    networks:
+      - user-management-network
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+  user-management:
+    container_name: user-management
+    restart: unless-stopped
+    build: ./user-management
+    ports:
+      - "4000:4000"
+    env_file: ./user-management/.env
+    networks:
+      - user-management-network
+    depends_on:
+      - user-db
+      - user-management-redis
+    environment:
+      - REDIS_URL=redis://user-management-redis:6379
+
+networks:
+  user-management-network:
+
+volumes:
+  mongo_data: {}
+  mongo_config: {}

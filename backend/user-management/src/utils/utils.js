@@ -2,6 +2,10 @@
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const ms = require("ms");
+const redis = require("redis");
+const redisClient = redis.createClient({
+  url: process.env.REDIS_URL,
+});
 
 // Generate token
 function generateToken(user) {
@@ -73,10 +77,33 @@ function handleResponse(request, response, statusCode, data, message) {
   return response.status(statusCode).json(resObj);
 }
 
+function getOrSetCache(key, callback) {
+  return new Promise((resolve, reject) => {
+    redisClient.get(key, async (error, data) => {
+      if (error) {
+        return reject(error);
+      }
+
+      if (data != null) {
+        return resolve(JSON.parse(data));
+      }
+
+      const freshData = await callback();
+      redisClient.setex(
+        key,
+        process.env.REDIS_EXPIRATION,
+        JSON.stringify(freshData)
+      );
+      resolve(freshData);
+    });
+  });
+}
+
 // Export for others to use this function
 module.exports = {
   generateToken,
   getCleanUser,
   handleResponse,
   verifyToken,
+  getOrSetCache,
 };

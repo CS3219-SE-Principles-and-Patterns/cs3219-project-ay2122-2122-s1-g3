@@ -1,6 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../model/user-model");
 const {
@@ -8,6 +6,7 @@ const {
   getCleanUser,
   handleResponse,
   verifyToken,
+  getOrSetCache,
 } = require("../utils/utils");
 
 router.post("/signup", function (request, response, next) {
@@ -86,7 +85,9 @@ router.post("/signin", async function (request, response) {
 
   // When username and password matches existing records
   const token = generateToken(userData); // Generate Token
-  const userObj = getCleanUser(userData); // Get user data that was used to generate token
+  const userObj = await getOrSetCache(`${token.token}`, async () => {
+    return getCleanUser(userData);
+  });
 
   return handleResponse(request, response, 200, {
     user: userObj,
@@ -103,15 +104,7 @@ router.get("/verifyToken", function (request, response) {
     return handleResponse(request, response, 400, null, "Token required.");
   }
 
-  // // Check token that was passed by decoding token using secret
-  // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-  //   if (err) {
-  //     return handleResponse(request, response, 401, null, "Token invalid.");
-  //   }
-  // });
-
-  // // const userObj = getCleanUser(userData);
-  // return response.json({ user: userObj, token });
+  // Check token that was passed by decoding token using secret
   verifyToken(token, async (err, payload) => {
     if (err) {
       return handleResponse(request, response, 401);

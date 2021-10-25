@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
-const { handleResponse } = require("./utils/utils");
+const { handleResponse, getOrSetCache } = require("./utils/utils");
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -37,7 +37,7 @@ app.use("/auth", authRoutes);
 
 // Middleware to check if Jwt Token exists and verifies it if it does
 // All the private route, this will help to know if the request is authenticated
-const authMiddleware = function (request, response, next) {
+const authMiddleware = async function (request, response, next) {
   // Check header or URL parameter or POST parameter for token
   var token = request.headers["authorization"];
 
@@ -46,16 +46,21 @@ const authMiddleware = function (request, response, next) {
   }
 
   token = token.replace("Bearer ", "");
-  jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-    if (err) {
-      return response
-        .status(401)
-        .json({ error: true, message: "Invalid User." });
-    } else {
-      request.user = user; // Set the user to request so that other routes can use it
-      next();
-    }
+  const user = await getOrSetCache(token, async () => {
+    return jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+      if (err) {
+        return response
+          .status(401)
+          .json({ error: true, message: "Invalid User." });
+      } else {
+        console.log("[Redis] Cache Missed");
+        return user;
+      }
+    });
   });
+
+  request.user = user; // Set the user to request so that other routes can use it
+  next();
 };
 
 // Using auth routes
