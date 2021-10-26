@@ -14,7 +14,7 @@ function Signup(props) {
   // handle button click of signup form
   const handleSignup = () => {
     axios
-      .post("", {
+      .post("http://localhost:4000/auth/signup", {
         email: email.value,
         password: password.value,
         username: username.value,
@@ -26,9 +26,7 @@ function Signup(props) {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else setError("Something went wrong.");
+        setError(error.response);
       });
   };
 

@@ -8,6 +8,7 @@ import { Room } from "./Screen/Room";
 import Profile from "./Screen/Profile";
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
+import { removeUserSession } from "./Utils/Common";
 
 // A header containing all current screens
 // for displaying purpose
@@ -32,17 +33,15 @@ function App() {
             <NavLink activeClassName="active" to="/profile">
               Profile
             </NavLink>
+            <button onClick={removeUserSession}>Logout</button>
           </div>
           <div className="content">
             <Switch>
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
-              {/* <PrivateRoute path="/home" component={Home} /> */}
-              <PublicRoute path="/home" component={Home} />
-              <PublicRoute path="/room" component={Room} />
-              {/* <PrivateRoute path="/room" component={Room} /> */}
-              <PublicRoute path="/profile" component={Profile} />
-              {/* <PrivateRoute path="/profile" component={Profile} /> */}
+              <PrivateRoute path="/home" component={Home} />
+              <PrivateRoute path="/room" component={Room} />
+              <PrivateRoute path="/profile" component={Profile} />
             </Switch>
           </div>
         </div>

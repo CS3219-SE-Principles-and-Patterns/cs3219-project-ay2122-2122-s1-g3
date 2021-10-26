@@ -14,7 +14,7 @@ function Login(props) {
     setError(null);
     setLoading(true);
     axios
-      .post("", {
+      .post("http://localhost:4000/auth/signin", {
         email: email.value,
         password: password.value,
       })
