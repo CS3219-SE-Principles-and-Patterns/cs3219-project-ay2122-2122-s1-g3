@@ -96,6 +96,11 @@ function Signup(props) {
             />
           </div>
         </div>
+        <div className="sub-form">
+          <label htmlFor="signup">
+            Already have an account? <a href="/Login"> Log in from here </a>
+          </label>
+        </div>
       </div>
     </div>
   );
