@@ -1,0 +1,40 @@
+.Editor{
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .textInput{
+        background-color: black;
+        width:90%;
+        height:100%;
+        border-radius: 10px;
+        color: white;
+    }
+    .CodeMirror{
+        width:90%;
+        height:100%;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .runCodeButtonWrapper{
+        width:90%;
+        text-align: end;
+        button{
+            font-weight: 600;
+            font-family: "Montserrat";
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            color: #000000;
+            background-color: #979ea5;
+            border: 2px rgba($color: #FFFFFF, $alpha: 0.80);
+            border-style: outset;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #b9bcbe;
+        }
+    }
+}

@@ -3,8 +3,11 @@
 node_modules/
 backend/video-chat-service/node_modules
 backend/video-chat-component/node_modules
+node_modules
+node_modules.nosync/
 .pnp/
 .pnp.js
+.DS_Store
 
 # testing
 coverage/
