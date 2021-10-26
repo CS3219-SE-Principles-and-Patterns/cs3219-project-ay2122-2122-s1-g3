@@ -13,7 +13,6 @@ export const Editor = () => {
   //TODO: Use real username or jwt token
   const username = Math.floor(Math.random() * 100 + 1).toString();
   const roomId = "1";
-  //const [code, setCode] = useState("");
 
   useEffect(() => {
     const editor = CodeMirror.fromTextArea(document.getElementById("ds"), {
@@ -21,7 +20,6 @@ export const Editor = () => {
       keyMap: "sublime",
       theme: "material-ocean",
       mode: "javascript",
-      width: "90%"
     });
 
     // const bookMark = editor.setBookmark({ line: 1, pos: 1 }, { widget })
@@ -33,7 +31,6 @@ export const Editor = () => {
     });
 
     socket.on("CODE_CHANGED", (code) => {
-      console.log(code);
       editor.setValue(code);
     });
 
