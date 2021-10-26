@@ -21,12 +21,28 @@ function Signup(props) {
       })
       .then((response) => {
         setLoading(false);
-        setUserSession(response.data.token, response.data.user);
-        props.history.push("/home");
+        axios
+          .post("http://localhost:4000/auth/signin", {
+            email: email.value,
+            password: password.value,
+          })
+          .then((response) => {
+            setLoading(false);
+            setUserSession(response.data.token, response.data.user);
+            props.history.push("/home");
+          })
+          .catch((error) => {
+            setLoading(false);
+            setError(error.response.data.message);
+          });
       })
       .catch((error) => {
         setLoading(false);
-        setError(error.response);
+        if (error.response) {
+          setError(error.response.data.message);
+        } else {
+          setError("Something went wrong :(");
+        }
       });
   };
 

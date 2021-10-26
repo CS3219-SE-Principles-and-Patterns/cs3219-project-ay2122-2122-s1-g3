@@ -25,9 +25,7 @@ function Login(props) {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else setError("Something went wrong.");
+        setError(error.response.data.message);
       });
   };
 
