@@ -3,13 +3,13 @@ import axios from "axios";
 import { getUser, getToken } from "../Utils/Common";
 
 function Profile(props) {
-  var username = "";
-  var email = "";
   const newPassword = useFormInput("");
   const user = getUser();
   const id = user.id;
   const token = getToken();
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState({
     text: "Your password has been successfully reset.",
@@ -23,9 +23,6 @@ function Profile(props) {
   };
 
   const handleResetPassword = () => {
-    console.log(id);
-    console.log(token);
-    console.log(newPassword);
     axios
       .put(
         `http://localhost:4000/users/updatePassword/${id}`,
@@ -40,40 +37,32 @@ function Profile(props) {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error.response.data);
         setError(error.response.data.message);
       });
   };
 
-  //   // retrieve user data
-  //   axios
-  //     .get(`http://localhost:4000/users/getSingleUser/${id}`)
-  //     .then((response) => {
-  //       setLoading(false);
-
-  //       var data = response.data.object;
-
-  //       for (var i = 0; i < data.length; i++) {
-  //         let type = data[i].content_type.toLowerCase();
-  //         if (type === username) {
-  //           username = data[i];
-  //         }
-  //         if (type === email) {
-  //           email = data[i];
-  //         }
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setLoading(false);
-  //       if (error.response.status === 401) setError(error.response.data.message);
-  //       else setError("Something went wrong.");
-  //     });
+  // retrieve user data
+  axios
+    .get(`http://localhost:4000/users/getSingleUser/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      setLoading(false);
+      setUsername(response.data.username);
+      setEmail(response.data.email);
+      console.log(username);
+      console.log(email);
+    })
+    .catch((error) => {
+      setLoading(false);
+      setError(error.response.data.message);
+    });
 
   return (
     <div className="Profile">
       <div className="field">
         <h6>Username:</h6>
-        <h6>{username}</h6>
+        <label>{username}</label>
       </div>
       <div className="field">
         <h6> Email:</h6>
