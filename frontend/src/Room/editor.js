@@ -10,6 +10,7 @@ import "./editorStyle.scss";
 
 export const Editor = () => {
   const [users, setUsers] = useState([]);
+  const [editorCode, setEditorCode] = useState("");
   //TODO: Use real username or jwt token
   const username = Math.floor(Math.random() * 100 + 1).toString();
   const roomId = "1";
@@ -32,6 +33,7 @@ export const Editor = () => {
 
     socket.on("CODE_CHANGED", (code) => {
       editor.setValue(code);
+      setEditorCode(code)
     });
 
     socket.on("connect_error", (err) => {
@@ -55,6 +57,7 @@ export const Editor = () => {
       const { origin } = changes;
       // if (origin === '+input' || origin === '+delete' || origin === 'cut') {
       if (origin !== "setValue") {
+        setEditorCode(instance.getValue())
         socket.emit("CODE_CHANGED", instance.getValue());
       }
     });
