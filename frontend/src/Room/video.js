@@ -8,6 +8,8 @@ import {
   FaPhone,
   FaPhoneSlash,
   FaPhoneVolume,
+  FaVideoSlash,
+  FaMicrophoneSlash,
 } from "react-icons/fa";
 
 const socket = io("http://localhost:3001/", {
@@ -16,6 +18,9 @@ const socket = io("http://localhost:3001/", {
 export const Video = () => {
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
+  const [camOn, setCamOn] = useState(true);
+  const [micOn, setMicOn] = useState(true);
+  const [callingUser, setCallingUser] = useState(false);
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState("");
   const [callerSignal, setCallerSignal] = useState();
@@ -31,7 +36,6 @@ export const Video = () => {
   const roomId = "1";
   const [users, setUsers] = useState([]);
 
-
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -46,7 +50,7 @@ export const Video = () => {
     });
 
     socket.on("ROOM:VIDEO:CONNECTION", (newUsers) => {
-      setUsers(newUsers.map(u => JSON.parse(u)));
+      setUsers(newUsers.map((u) => JSON.parse(u)));
     });
 
     socket.on("callUser", (data) => {
@@ -55,10 +59,18 @@ export const Video = () => {
       setName(data.name);
       setCallerSignal(data.signal);
     });
+
+    socket.on("callEnded", () => {
+      setCallEnded(true);
+      setCallAccepted(false);
+      setReceivingCall(false);
+    });
   }, []);
 
   const callUser = () => {
-    const id = users.filter(u => u.socketID !== me)[0].socketID
+    setCallEnded(false);
+    setCallingUser(true)
+    const id = users.filter((u) => u.socketID !== me)[0].socketID;
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -77,6 +89,7 @@ export const Video = () => {
     });
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
+      setCallingUser(false)
       peer.signal(signal);
     });
 
@@ -85,6 +98,7 @@ export const Video = () => {
 
   const answerCall = () => {
     setCallAccepted(true);
+    setCallEnded(false);
     const peer = new Peer({
       initiator: false,
       trickle: false,
@@ -104,17 +118,41 @@ export const Video = () => {
   //TODO: clean this
   const leaveCall = () => {
     setCallEnded(true);
-    connectionRef.current.destroy();
+    setCallAccepted(false);
+    setReceivingCall(false);
+    socket.emit("callEnded");
+    //connectionRef.current.destroy();
   };
 
+  const toggleMic = () => {
+    stream
+      .getAudioTracks()
+      .forEach((track) => (track.enabled = !track.enabled));
+    setMicOn((state) => !state);
+  };
+
+  const toggleCam = () => {
+    stream
+      .getVideoTracks()
+      .forEach((track) => (track.enabled = !track.enabled));
+    setCamOn((state) => !state);
+  };
   return (
     <div className="Video">
       <div className="leftButtons">
         <button className="videoButton">
-          <FaVideo />
+          {camOn ? (
+            <FaVideo onClick={toggleCam} />
+          ) : (
+            <FaVideoSlash onClick={toggleCam} />
+          )}
         </button>
         <button className="microhphoneButton">
-          <FaMicrophone />
+        {micOn ? (
+            <FaMicrophone onClick={toggleMic} />
+          ) : (
+            <FaMicrophoneSlash onClick={toggleMic} />
+          )}
         </button>
         {/* myID: {me}
         <textarea
@@ -133,7 +171,7 @@ export const Video = () => {
         {callAccepted && !callEnded ? (
           <video playsInline ref={userVideo} autoPlay />
         ) : (
-          "Rollrollfaraway video"
+          "Partner video"
         )}
       </div>
       <div className="rightButtons">
@@ -144,10 +182,12 @@ export const Video = () => {
         ) : receivingCall && !callAccepted ? (
           <button className="callButton" onClick={answerCall}>
             {/* TODO: put username here */}
-            ... is calling
+            Partner is calling
             <FaPhoneVolume />
           </button>
-        ) : (
+        ) : callingUser ? (
+          <span>Calling User <FaPhoneVolume /></span>
+        ) :(
           <button className="callButton" onClick={callUser}>
             <FaPhone />
           </button>

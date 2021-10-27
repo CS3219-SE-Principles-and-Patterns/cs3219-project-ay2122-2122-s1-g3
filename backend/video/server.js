@@ -39,9 +39,10 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", async () => {
     // Not sure about the line below
-    socket.broadcast.emit("callEnded");
-
+    //socket.broadcast.emit("callEnded");
     const { roomId, username } = await client.hGetAll(`video:${socket.id}`);
+    const roomName = `ROOM:VIDEO:${roomId}`;
+    io.in(roomName).emit("callEnded");
     const users = await client.lRange(`${roomId}:video:users`, 0, -1);
     const newUsers = users.filter((user) => socket.id !== JSON.parse(user).socketID);
     if (newUsers.length) {
@@ -53,6 +54,12 @@ io.on("connection", (socket) => {
     console.log(newUsers)
 
   });
+
+  socket.on("callEnded", async () => {
+    const { roomId, username } = await client.hGetAll(`video:${socket.id}`);
+    const roomName = `ROOM:VIDEO:${roomId}`;
+    io.in(roomName).emit("callEnded");
+  })
 
   socket.on("callUser", (data) => {
     io.to(data.userToCall).emit("callUser", {
