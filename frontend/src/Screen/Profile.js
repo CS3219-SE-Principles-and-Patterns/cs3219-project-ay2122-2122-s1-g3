@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { getUser, getToken } from "../Utils/Common";
+import "../Style/Profile.scss";
 
 function Profile(props) {
   const newPassword = useFormInput("");
+  const confirmPassword = useFormInput("");
   const user = getUser();
   const id = user.id;
   const token = getToken();
@@ -61,11 +63,11 @@ function Profile(props) {
   return (
     <div className="Profile">
       <div className="field">
-        <h6>Username:</h6>
-        <label>{username}</label>
+        <h6>Username: </h6>
+        <h6>{username}</h6>
       </div>
       <div className="field">
-        <h6> Email:</h6>
+        <h6>Email: </h6>
         <h6>{email}</h6>
       </div>
       {error && (
@@ -74,24 +76,53 @@ function Profile(props) {
           <br />
         </>
       )}
-      <div className="sub-form">
-        <label htmlFor="password">New password</label>
-        <input type="password" {...newPassword} autoComplete="new-password" />
-      </div>
+      <table>
+        <tr>
+          <td>
+            <label htmlFor="password">New password</label>
+          </td>
+          <td>
+            <input
+              type="password"
+              {...newPassword}
+              autoComplete="new-password"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label htmlFor="confirm-password">Confirm Password</label>
+          </td>
+          <td>
+            <input
+              type="password"
+              {...confirmPassword}
+              autoComplete="new-password"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div></div>
+          </td>
+          <td>
+            <div className="resetpwd-button">
+              <input
+                type="button"
+                value={loading ? "Loading..." : "Reset password"}
+                onClick={handleResetPassword}
+                disabled={loading}
+              />
+            </div>
+          </td>
+        </tr>
+      </table>
       {error && (
         <>
           <small style={{ color: "red" }}>{error}</small>
           <br />
         </>
       )}
-      <div className="changepwd-button">
-        <input
-          type="button"
-          value={loading ? "Loading..." : "Reset password"}
-          onClick={handleResetPassword}
-          disabled={loading}
-        />
-      </div>
     </div>
   );
 }

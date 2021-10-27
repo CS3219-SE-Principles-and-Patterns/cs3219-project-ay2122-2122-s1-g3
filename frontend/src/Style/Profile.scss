@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
+
+.Profile {
+  background-color: hsl(0, 0%, 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding: 5%;
+  .field {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 24px;
+    color: #4e555d;
+  }
+  table {
+    font-weight: 600;
+    width: fit-content;
+
+    label {
+      background-color: blue;
+      border-spacing: 50px;
+    }
+
+    input {
+      font-family: "Montserrat";
+      min-width: 1em;
+      height: 45px;
+      padding: 0px 20px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      background-color: #e7ebf0;
+      border: 0;
+      border-radius: 30px;
+      margin-top: 10px;
+      margin-bottom: 31px;
+    }
+    input:focus {
+      outline-color: #444a50;
+    }
+    input:active {
+      color: #444a50;
+    }
+  }
+}
+
+.sub-form label {
+  font-family: "Montserrat";
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #4e555d;
+  font-weight: 500;
+}
