@@ -34,7 +34,7 @@ function Profile(props) {
         }
       )
       .then(() => {
-        setMsg("Password has been set successfully");
+        setMsg("Password has been reset successfully");
         setClosePopup(true);
         setError(null);
       })
@@ -67,7 +67,7 @@ function Profile(props) {
         <h6>{email}</h6>
       </div>
       <Popup
-        trigger={<button className="button"> Reset password </button>}
+        trigger={<button className="reset-button"> Reset password </button>}
         modal
         nested
       >
@@ -78,62 +78,64 @@ function Profile(props) {
             </button>
             <div className="header"> Reset Password </div>
             <table>
-              <tr>
-                <td>
-                  <label htmlFor="password">New password</label>
-                </td>
-                <td>
-                  <input
-                    type="password"
-                    {...newPassword}
-                    autoComplete="new-password"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="confirm-password">Confirm Password</label>
-                </td>
-                <td>
-                  <input
-                    type="password"
-                    {...confirmPassword}
-                    autoComplete="new-password"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div></div>
-                </td>
-                <td>
-                  {error && (
-                    <>
-                      <small style={{ color: "red" }}>{error}</small>
-                      <br />
-                    </>
-                  )}
-                  {msg && (
-                    <>
-                      <small style={{ color: "green" }}>{msg}</small>
-                      <br />
-                    </>
-                  )}
-                  <div className="resetpwd-button">
+              <tbody>
+                <tr>
+                  <td>
+                    <label htmlFor="password">New password</label>
+                  </td>
+                  <td>
                     <input
-                      type="button"
-                      value={closePopup ? "Close" : "Reset"}
-                      onClick={() => {
-                        handleResetPassword();
-                        if (closePopup) {
-                          close();
-                          window.location.reload();
-                        }
-                      }}
+                      type="password"
+                      {...newPassword}
+                      autoComplete="new-password"
                     />
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label htmlFor="confirm-password">Confirm Password</label>
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      {...confirmPassword}
+                      autoComplete="new-password"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div></div>
+                  </td>
+                  <td>
+                    {error && (
+                      <>
+                        <small style={{ color: "red" }}>{error}</small>
+                        <br />
+                      </>
+                    )}
+                    {msg && (
+                      <>
+                        <small style={{ color: "green" }}>{msg}</small>
+                        <br />
+                      </>
+                    )}
+                    <div className="cfm-button">
+                      <input
+                        type="button"
+                        value={closePopup ? "Close" : "Reset"}
+                        onClick={() => {
+                          handleResetPassword();
+                          if (closePopup) {
+                            close();
+                            window.location.reload();
+                          }
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         )}
