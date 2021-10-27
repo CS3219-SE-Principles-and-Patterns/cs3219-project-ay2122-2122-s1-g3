@@ -82,6 +82,6 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(3001, () => {
-  console.log(greenBright.bold('listening on *:3001'))
+server.listen(3002, () => {
+  console.log(greenBright.bold('listening on *:3002'))
 })

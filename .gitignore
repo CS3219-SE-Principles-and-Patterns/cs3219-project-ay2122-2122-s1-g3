@@ -8,6 +8,7 @@ node_modules.nosync/
 .pnp/
 .pnp.js
 .DS_Store
+.idea
 
 # testing
 coverage/
