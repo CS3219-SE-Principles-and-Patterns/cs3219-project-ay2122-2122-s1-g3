@@ -13,13 +13,16 @@ function Profile(props) {
   const [error, setError] = useState(null);
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState(null);
   const [closePopup, setClosePopup] = useState(false);
 
   const handleResetPassword = () => {
     if (newPassword.value !== confirmPassword.value) {
       setError("Password does not match.");
+      return;
+    }
+    if (newPassword.value === "") {
+      setError("Password cannot be empty.");
       return;
     }
     axios
@@ -31,18 +34,14 @@ function Profile(props) {
         }
       )
       .then(() => {
-        setLoading(false);
         setMsg("Password has been set successfully");
         setClosePopup(true);
         setError(null);
       })
       .catch((error) => {
-        setLoading(false);
-        //setError(error.response.data.message);
+        setError(error.response.data.message);
       });
   };
-
-  const handleReset = () => {};
 
   // retrieve user data
   axios
@@ -50,12 +49,10 @@ function Profile(props) {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      setLoading(false);
       setUsername(response.data.username);
       setEmail(response.data.email);
     })
     .catch((error) => {
-      setLoading(false);
       setError(error.response.data.message);
     });
 
@@ -79,7 +76,7 @@ function Profile(props) {
             <button className="close" onClick={close}>
               &times;
             </button>
-            <div className="header"> Modal Title </div>
+            <div className="header"> Reset Password </div>
             <table>
               <tr>
                 <td>
