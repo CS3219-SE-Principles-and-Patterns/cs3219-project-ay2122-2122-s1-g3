@@ -13,6 +13,10 @@ function Signup(props) {
 
   // handle button click of signup form
   const handleSignup = () => {
+    if (password.value !== confirmPassword.value) {
+      setError("Password does not match.");
+      return;
+    }
     axios
       .post("http://localhost:4000/auth/signup", {
         email: email.value,

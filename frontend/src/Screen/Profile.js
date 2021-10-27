@@ -25,6 +25,10 @@ function Profile(props) {
   };
 
   const handleResetPassword = () => {
+    if (newPassword.value !== confirmPassword.value) {
+      setError("Password does not match.");
+      return;
+    }
     axios
       .put(
         `http://localhost:4000/users/updatePassword/${id}`,
@@ -52,8 +56,6 @@ function Profile(props) {
       setLoading(false);
       setUsername(response.data.username);
       setEmail(response.data.email);
-      console.log(username);
-      console.log(email);
     })
     .catch((error) => {
       setLoading(false);
