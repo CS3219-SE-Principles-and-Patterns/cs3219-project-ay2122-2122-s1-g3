@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { getUser, getToken } from "../Utils/Common";
 import "../Style/Profile.scss";
+import Popup from "reactjs-popup";
 
 function Profile(props) {
   const newPassword = useFormInput("");
@@ -13,16 +14,8 @@ function Profile(props) {
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState({
-    text: "Your password has been successfully reset.",
-    show: false,
-  });
-  const onShowMsg = () => {
-    setMsg({ show: true });
-  };
-  const onCloseMsg = () => {
-    setMsg({ show: true });
-  };
+  const [msg, setMsg] = useState(null);
+  const [closePopup, setClosePopup] = useState(false);
 
   const handleResetPassword = () => {
     if (newPassword.value !== confirmPassword.value) {
@@ -40,12 +33,16 @@ function Profile(props) {
       .then(() => {
         setLoading(false);
         setMsg("Password has been set successfully");
+        setClosePopup(true);
+        setError(null);
       })
       .catch((error) => {
         setLoading(false);
-        setError(error.response.data.message);
+        //setError(error.response.data.message);
       });
   };
+
+  const handleReset = () => {};
 
   // retrieve user data
   axios
@@ -72,59 +69,78 @@ function Profile(props) {
         <h6>Email: </h6>
         <h6>{email}</h6>
       </div>
-      {error && (
-        <>
-          <small style={{ color: "red" }}>{error}</small>
-          <br />
-        </>
-      )}
-      <table>
-        <tr>
-          <td>
-            <label htmlFor="password">New password</label>
-          </td>
-          <td>
-            <input
-              type="password"
-              {...newPassword}
-              autoComplete="new-password"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label htmlFor="confirm-password">Confirm Password</label>
-          </td>
-          <td>
-            <input
-              type="password"
-              {...confirmPassword}
-              autoComplete="new-password"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div></div>
-          </td>
-          <td>
-            <div className="resetpwd-button">
-              <input
-                type="button"
-                value={loading ? "Loading..." : "Reset password"}
-                onClick={handleResetPassword}
-                disabled={loading}
-              />
-            </div>
-          </td>
-        </tr>
-      </table>
-      {error && (
-        <>
-          <small style={{ color: "red" }}>{error}</small>
-          <br />
-        </>
-      )}
+      <Popup
+        trigger={<button className="button"> Reset password </button>}
+        modal
+        nested
+      >
+        {(close) => (
+          <div className="modal">
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+            <div className="header"> Modal Title </div>
+            <table>
+              <tr>
+                <td>
+                  <label htmlFor="password">New password</label>
+                </td>
+                <td>
+                  <input
+                    type="password"
+                    {...newPassword}
+                    autoComplete="new-password"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="confirm-password">Confirm Password</label>
+                </td>
+                <td>
+                  <input
+                    type="password"
+                    {...confirmPassword}
+                    autoComplete="new-password"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div></div>
+                </td>
+                <td>
+                  {error && (
+                    <>
+                      <small style={{ color: "red" }}>{error}</small>
+                      <br />
+                    </>
+                  )}
+                  {msg && (
+                    <>
+                      <small style={{ color: "green" }}>{msg}</small>
+                      <br />
+                    </>
+                  )}
+                  <div className="resetpwd-button">
+                    <input
+                      type="button"
+                      value={closePopup ? "Close" : "Reset"}
+                      onClick={() => {
+                        handleResetPassword();
+                        if (closePopup) {
+                          close();
+                          window.location.reload();
+                        }
+                      }}
+                    />
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        )}
+      </Popup>
     </div>
   );
 }
