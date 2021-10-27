@@ -50,7 +50,6 @@ export const Editor = () => {
 
     socket.on("ROOM:CONNECTION", (users) => {
       setUsers(users);
-      console.log(users);
     });
 
     editor.on("change", (instance, changes) => {
