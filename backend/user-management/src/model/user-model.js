@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
   username: String,
   email: String,
   isAdmin: Boolean,
+  isSearching: Boolean,
+  difficulty: String,
   updated_at: { type: Date, default: Date.now },
 });
 

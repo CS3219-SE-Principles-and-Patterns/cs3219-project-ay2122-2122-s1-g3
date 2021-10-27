@@ -43,6 +43,8 @@ router.post("/signup", async function (request, response, next) {
 
   bodyData["password"] = hash;
   bodyData["isAdmin"] = false;
+  bodyData["isSearching"] = false;
+  bodyData["difficulty"] = "easy";
 
   User.create(bodyData, function (err, post) {
     if (err) {
