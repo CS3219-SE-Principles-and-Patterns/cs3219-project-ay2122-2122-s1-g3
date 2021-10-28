@@ -1,42 +1,92 @@
-# matchmaking
-A simple matchmaking service written in node.js
+# PROJECT
+Create a matchmaking service given hypothetical player information.
 
-**Basics**
+# INSTALLING
+npm install package.json
 
-matchmaking is a simple tool that runs a service which matches players according to their ranking. It also tracks basic statistics
-which can be used for benchmarking.
+# RUNNING TESTS
+npm test
 
-**<h3>How to use</h3>**
+# STARTING THE SERVER
+node app/server.js
 
-Clone into local repo, then run **npm install**. that should install all the necessary dependecies.
-To see if all is well, run **npm test**. In order to be able to test a relatively large player pool, 
-the current FIDE Chess Standard rating player list has been added as mock data and is used by most of the tests.
+## A complete client matchmaking example
+If you run:
 
-**<h4>Basic run with mock data</h4>**
-Run the app with **node run.js**
+node app/client.js
 
+While this is running, many clients will attempt to perform all the requests necessary of a complete matchmaking example.
 
-Basic parameters are stored in config.js:
+Otherwise, a full example is: 
 
-* loadCsv = *true* - whether mock data is loaded
+1. Start the server in another tab
 
-* feeder = *true* - csv players will be fed to queue
+2. Run this curl command which simulates starting the search
+  curl -d '{"id":"1", "mmr":"0"}' -H "Content-Type: application/json" -X POST http://localhost:8099/start
 
-* feedOneTime = *false* - true inserts all players instantly, false feeds them slowly
+3. Run the same command but with a different ID (simulates another client searching):
+  curl -d '{"id":"2", "mmr":"0"}' -H "Content-Type: application/json" -X POST http://localhost:8099/start
 
-* feedNum = *5000* - how many do we queue up per second if feedOneTime = false
+4. Poll the server and ask if you've been paired with anyone yet. If so, you'll get your opponent's ID:
+  curl -d '{"id":"2", "mmr":"0"}' -H "Content-Type: application/json" -X POST http://localhost:8099/status
 
-* minLeniency = *20* - starting leniency - players can have 20 points rating difference and be paired
+  Note: At this point you've been matched and you would be redirected to a lobby that only you and your opponent have access to.
+      The actual redirecting to a match lobby isn't implemented.
 
-* maxLeniency = *300* - maximum leniency - can be reached if a player is waiting for a long time
+5. Tell the server you have your opponent's information and that the server can forget about you
+  curl -d '{"id":"2", "mmr":"0"}' -H "Content-Type: application/json" -X POST http://localhost:8099/update
 
-**<h4>Adding custom players to be matched</h4>**
+  Note: After you run ^ you will be able to restart matchmaking.
 
-We use socket.io with event 'playerAdd' to add players to the queue. Example:
+### MY NOTES ABOUT MATCHMAKING
 
-`var socket = io.connect('http://localhost:3000', {reconnect: true});`
+-Matchmaking is about bringing two equally (or psuedo-equally) skilled players together.
+-The skill of a player is set by MMR (Matchmaking rating), which is a positive numerical ranking. This ranking is calculated with an algorithm by the game developer or publisher.
+-After every match, a player's MMR is updated based on the results of the match and other factors.
+-A lot of the MMR algorithms assume player skill is normally distributed.
+  With this assumption ^ I can calculate the expected win probabilities of two players.
 
-`socket.emit('playerAdd', {name: 'player 1', rating:'1510'});`
+### WIN PROBABILITY CALCULATION
 
+The probability that a player (p1) will beat an opponent (p2) is:
 
+P (p1 > p2| s1, s2) = CDF((s1 - s2) / sqrt(s1.sigma**2 + s2.sigma**2))
+
+where:
+  s1 & s2 are skill estimates;
+  CDF is a gaussian cumulative density function
+  the denominator is the square root of the sum of variances of the two players.
+
+Source: https://www.microsoft.com/en-us/research/wp-content/uploads/2007/01/NIPS2006_0688.pdf
+
+Note: In extreme cases, high variance in skill or low variance in skill leads to bad results.
+
+# IMPLEMENTATION
+Creating bins for skill ranges is how I implemented the matchmaking service
+
+The pseudo-code for a binned matchmaker would be:
+  - Create bin ranges for the entire MMR range of your players (ie 0-10,000); Each bin range gets its own queue.
+    You can tailor your bin ranges to have equi-player-pool-sized buckets, based on MMR frequency info about your players.
+
+  - When a player decides to search, lookup their bin based on their MMR info and retrieve the queue
+
+  - If there are no players in the queue, add them to the top of the queue
+    - Repeatedly poll the bin pool until a new player is added (or keep a websocket connection alive and wait to be updated)
+
+  - Else pick the player at the top of the queue and dequeue that player
+    - Tell both clients a match is made
+
+  -As the user, update the server you have your opponent info / lobby info
+    - Server "forgets" about user and that user can now start over again matchmaking
+
+Apart from the intial bin-range creation, this doesn't require calculations to be made. There's no iterating over players to calculate win probabilities, and if the player pool is a queue, dequeue and enqueue both are of O(1) complexity. The bins can also easily be stored in memory (you only need the player ID and queue structure). The player ID is usually just the Steam ID which is a 32 bit number.
+
+There are problems with this implementation, however. If you have a player with a very well defined MMR, that it at either edge of a bin range, then that player will either win or lose with a high probability.
+
+For example:
+
+Consider a bin with MMR ranges of [950-1000], and a player with 950 MMR or 1000 MMR and 1 standard deviation.
+Take an example opponent of 975 with standard deviation of 30.
+The 950 player will lose an estimated 80% of the time. The 1000 player will win 80% of the time.
+In the most extreme example, the 1000 player will win 100% if playing against the 950 player.
 
