@@ -39,6 +39,9 @@ function getCleanUser(user) {
   return {
     id: user._id,
     username: user.username,
+    email: user.email,
+    isSearching: user.isSearching,
+    difficulty: user.difficulty,
     isAdmin: user.isAdmin,
   };
 }

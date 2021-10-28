@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require("../model/user-model");
 const { handleResponse } = require("../utils/utils");
 
-// request handlers
+// To be remove
 router.get("/", (req, res) => {
   res.send("Welcome to CS3219 Group Work - Users");
 });
