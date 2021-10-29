@@ -1,4 +1,5 @@
 const util = require('util') // remove this
+var uuidv5 = require('uuidv5');
 
 class SearchingClientsManager{
   constructor(properties){
@@ -179,7 +180,21 @@ function statusHandler(properties, ds_manager, req, res){
   console.log('QUEUES', properties.BINNED_QUEUES);
   console.log('Dequeued', Object.keys(properties.DEQUEUED_PLAYERS).length);
   if (competitor_matched){
-    return res.status(200).json({response:'A match was found', competitor_id:competitor_matched });
+    var mine = id;
+    var other = competitor_matched;
+
+    var final;
+
+    if (mine < other) {
+      final = mine + other;
+    } else {
+      final = other + mine;
+    }
+
+    final = uuidv5('dns', final);
+
+
+    return res.status(200).json({response:'A match was found', competitor_id:competitor_matched, meeting_id:final });
   }
 
   else if (!is_queued){
