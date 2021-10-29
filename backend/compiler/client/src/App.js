@@ -49,7 +49,7 @@ function App() {
       ></textarea>
       <br />
       <button onClick={handleSubmit}>Submit</button>
-      <p>{output}</p>
+      <p style={{whiteSpace:"pre-line"}}>{output}</p>
     </div>
   );
 }

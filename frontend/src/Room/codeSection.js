@@ -1,6 +1,5 @@
 import "./codeSectionStyle.scss";
 import { Editor } from "./editor";
-import { Terminal } from "./terminal";
 
 export const CodeSection = () => {
   return (
@@ -12,8 +11,6 @@ export const CodeSection = () => {
         <div className="questionTitle">Your Code</div>
       </div>
       <Editor />
-      <div className="terminalHeader">Standard Output</div>
-      <Terminal />
     </div>
   );
 };

@@ -36,7 +36,7 @@ function App() {
           </div>
           <div className="content">
             <Switch>
-              <PrivateRoute path="/home" component={Home} />
+              <PublicRoute path="/home" component={Home} />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
               <PublicRoute path="/room" component={Room} />
