@@ -3,6 +3,8 @@ import axios from "axios";
 import { getUser, getToken } from "../Utils/Common";
 import "../Style/Profile.scss";
 import Popup from "reactjs-popup";
+import avatar from "./avatar.png";
+import validator from "validator";
 
 function Profile(props) {
   const newPassword = useFormInput("");
@@ -23,6 +25,20 @@ function Profile(props) {
     }
     if (newPassword.value === "") {
       setError("Password cannot be empty.");
+      return;
+    }
+    if (
+      !validator.isStrongPassword(newPassword.value, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setError(
+        "Password must consist at least 8 characters, with 1 lowercase, 1 uppercase, 1 number and 1 symbol."
+      );
       return;
     }
     axios
@@ -58,13 +74,27 @@ function Profile(props) {
 
   return (
     <div className="profile">
+      <img src={avatar} alt="avatar" width="70" />
+
       <div className="field">
-        <h6>Username: </h6>
-        <h6>{username}</h6>
-      </div>
-      <div className="field">
-        <h6>Email: </h6>
-        <h6>{email}</h6>
+        <table className="table">
+          <tr>
+            <td>
+              <div>Username:</div>
+            </td>
+            <td>
+              <div>{username}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>Email:</div>
+            </td>
+            <td>
+              <div>{email}</div>
+            </td>
+          </tr>
+        </table>
       </div>
       <div className="popup">
         <Popup
@@ -106,22 +136,22 @@ function Profile(props) {
                     </td>
                   </tr>
                   <tr className="tablerow">
-                    <td>
-                      <div></div>
-                    </td>
+                    <td></td>
                     <td className="tabledata">
-                      {error && (
-                        <>
-                          <small style={{ color: "red" }}>{error}</small>
-                          <br />
-                        </>
-                      )}
-                      {msg && (
-                        <>
-                          <small style={{ color: "green" }}>{msg}</small>
-                          <br />
-                        </>
-                      )}
+                      <div className="msg">
+                        {error && (
+                          <>
+                            <small style={{ color: "red" }}>{error}</small>
+                            <br />
+                          </>
+                        )}
+                        {msg && (
+                          <>
+                            <small style={{ color: "green" }}>{msg}</small>
+                            <br />
+                          </>
+                        )}
+                      </div>
                       <div>
                         <input
                           className="cfm-button"

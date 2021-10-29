@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
 
-.modal {
-  font-size: 12px;
-}
 .modal > .header {
   font-family: "Montserrat";
   letter-spacing: 1px;
@@ -21,7 +18,7 @@
   border-bottom-right-radius: 10px;
   background-color: #4e555d;
   padding-right: 1em;
-  margin-right: -0.834em;
+  margin-right: -0.63em;
   padding-left: 1em;
   color: #dddddd;
   font-family: "Montserrat";
@@ -51,6 +48,11 @@
         }
         input:active {
           color: #444a50;
+        }
+
+        .msg {
+          max-width: 12rem;
+          font-size: small;
         }
 
         .cfm-button {
@@ -98,25 +100,23 @@
   border-radius: 18px;
   border: 1px solid #cfcece;
 }
-.popup {
-  .reset-button {
-    font-weight: 600;
-    font-family: "Montserrat";
-    font-size: 14spx;
-    letter-spacing: 1px;
-    color: #4e555d;
-    width: 10rem;
-    height: 30px;
-    //background-color: #e7ebf0;
-    border: 0;
-    border-radius: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 3px rgba($color: #868686, $alpha: 0.4);
-    border-style: outset;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+
+.reset-button {
+  font-weight: 600;
+  font-family: "Montserrat";
+  font-size: 14spx;
+  letter-spacing: 1px;
+  color: #4e555d;
+  width: 10rem;
+  height: 30px;
+  border: 0;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 3px rgba($color: #868686, $alpha: 0.4);
+  border-style: outset;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .profile {
@@ -125,4 +125,25 @@
   height: 100%;
   width: 100%;
   text-align: center;
+  padding-top: 5rem;
+}
+
+.field {
+  font-family: "Montserrat";
+  letter-spacing: 1px;
+  color: #4e555d;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: 2rem;
+}
+.field > table {
+  align-self: center;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5rem;
+  margin-bottom: 10px;
 }

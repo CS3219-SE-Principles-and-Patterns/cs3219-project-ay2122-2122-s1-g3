@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { setUserSession } from "../Utils/Common";
 import "../Style/LoginSignup.scss";
+import validator from "validator";
 
 function Signup(props) {
   const username = useFormInput("");
@@ -13,8 +14,30 @@ function Signup(props) {
 
   // handle button click of signup form
   const handleSignup = () => {
+    if (username.value === "") {
+      setError("Username cannot be empty.");
+      return;
+    }
+    if (email.value === "") {
+      setError("Email cannot be empty.");
+      return;
+    }
     if (password.value !== confirmPassword.value) {
       setError("Password does not match.");
+      return;
+    }
+    if (
+      !validator.isStrongPassword(password.value, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setError(
+        "Password must consist at least 8 characters, with 1 lowercase, 1 uppercase, 1 number and 1 symbol."
+      );
       return;
     }
     axios
