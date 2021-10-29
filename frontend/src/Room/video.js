@@ -69,7 +69,7 @@ export const Video = () => {
 
   const callUser = () => {
     setCallEnded(false);
-    setCallingUser(true)
+    setCallingUser(true);
     const id = users.filter((u) => u.socketID !== me)[0].socketID;
     const peer = new Peer({
       initiator: true,
@@ -89,7 +89,7 @@ export const Video = () => {
     });
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
-      setCallingUser(false)
+      setCallingUser(false);
       peer.signal(signal);
     });
 
@@ -148,7 +148,7 @@ export const Video = () => {
           )}
         </button>
         <button className="microhphoneButton">
-        {micOn ? (
+          {micOn ? (
             <FaMicrophone onClick={toggleMic} />
           ) : (
             <FaMicrophoneSlash onClick={toggleMic} />
@@ -175,11 +175,6 @@ export const Video = () => {
         )}
       </div>
       <div className="rightButtons">
-<<<<<<< HEAD
-        <button className="smileyButton">
-          <FaRegLaugh />
-        </button>
-=======
         {callAccepted && !callEnded ? (
           <button className="endCallButton" onClick={leaveCall}>
             <FaPhoneSlash />
@@ -191,13 +186,14 @@ export const Video = () => {
             <FaPhoneVolume />
           </button>
         ) : callingUser ? (
-          <span>Calling User <FaPhoneVolume /></span>
-        ) :(
+          <span>
+            Calling User <FaPhoneVolume />
+          </span>
+        ) : (
           <button className="callButton" onClick={callUser}>
             <FaPhone />
           </button>
         )}
->>>>>>> 99468f7a68e4fa2793791f81d583979ab24177d3
       </div>
     </div>
   );
