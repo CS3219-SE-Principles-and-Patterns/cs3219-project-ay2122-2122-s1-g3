@@ -12,10 +12,10 @@ import {
   FaMicrophoneSlash,
 } from "react-icons/fa";
 
-const socket = io("http://localhost:3001/", {
-  transports: ["websocket"],
-});
 export const Video = () => {
+  const socket = io("http://localhost:3001/", {
+    transports: ["websocket"],
+  });
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
   const [camOn, setCamOn] = useState(true);

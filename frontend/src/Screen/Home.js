@@ -82,3 +82,25 @@ const useFormInput = (initialValue) => {
 };
 
 export default Home;
+
+
+// INSTRUCTIONS FOR USING MATHCMAKING
+
+// localhost: 8099
+
+// 1. Send /update 
+//   => this removes id from queue if inside, otherwise does nothing
+
+// 2. Send /start
+//   => this adds current id and difficulty to the queue
+
+//   - Call once at the start of matchmaking
+
+// 3. Send /status
+//   => this retrieves the status of whether a match has been found or not
+
+//   - Call this continously until the failure message not returned OR timeout expired
+
+// 4. Send /update 
+  
+//   - To reset queue again before leaving
