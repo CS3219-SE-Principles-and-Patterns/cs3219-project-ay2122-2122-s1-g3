@@ -37,10 +37,6 @@ function App() {
           </div>
           <div className="content">
             <Switch>
-<<<<<<< HEAD
-=======
-              <PublicRoute path="/home" component={Home} />
->>>>>>> 4bb9b8ff5a3a7b394a5b32e857e7e827394a8303
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
               <PrivateRoute path="/home" component={Home} />

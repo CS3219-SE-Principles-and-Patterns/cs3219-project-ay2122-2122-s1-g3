@@ -34,7 +34,7 @@ function Profile(props) {
         }
       )
       .then(() => {
-        setMsg("Password has been reset successfully");
+        setMsg("Password reset is successful");
         setClosePopup(true);
         setError(null);
       })
@@ -57,7 +57,7 @@ function Profile(props) {
     });
 
   return (
-    <div className="Profile">
+    <div className="profile">
       <div className="field">
         <h6>Username: </h6>
         <h6>{username}</h6>
@@ -66,80 +66,84 @@ function Profile(props) {
         <h6>Email: </h6>
         <h6>{email}</h6>
       </div>
-      <Popup
-        trigger={<button className="reset-button"> Reset password </button>}
-        modal
-        nested
-      >
-        {(close) => (
-          <div className="modal">
-            <button className="close" onClick={close}>
-              &times;
-            </button>
-            <div className="header"> Reset Password </div>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <label htmlFor="password">New password</label>
-                  </td>
-                  <td>
-                    <input
-                      type="password"
-                      {...newPassword}
-                      autoComplete="new-password"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                  </td>
-                  <td>
-                    <input
-                      type="password"
-                      {...confirmPassword}
-                      autoComplete="new-password"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div></div>
-                  </td>
-                  <td>
-                    {error && (
-                      <>
-                        <small style={{ color: "red" }}>{error}</small>
-                        <br />
-                      </>
-                    )}
-                    {msg && (
-                      <>
-                        <small style={{ color: "green" }}>{msg}</small>
-                        <br />
-                      </>
-                    )}
-                    <div className="cfm-button">
+      <div className="popup">
+        <Popup
+          trigger={<button className="reset-button"> Reset password </button>}
+          modal
+          nested
+        >
+          {(close) => (
+            <div className="modal">
+              <div className="header"> Reset Password </div>
+              <table className="box">
+                <tbody className="tablebody">
+                  <tr className="tablerow">
+                    <td>
+                      <label htmlFor="password">New password</label>
+                    </td>
+                    <td className="tabledata">
                       <input
-                        type="button"
-                        value={closePopup ? "Close" : "Reset"}
-                        onClick={() => {
-                          handleResetPassword();
-                          if (closePopup) {
-                            close();
-                            window.location.reload();
-                          }
-                        }}
+                        className="input"
+                        type="password"
+                        {...newPassword}
+                        autoComplete="new-password"
                       />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Popup>
+                    </td>
+                  </tr>
+                  <tr className="tablerow">
+                    <td>
+                      <label htmlFor="confirm-password">
+                        Confirm Password{" "}
+                      </label>
+                    </td>
+                    <td className="tabledata">
+                      <input
+                        className="input"
+                        type="password"
+                        {...confirmPassword}
+                        autoComplete="new-password"
+                      />
+                    </td>
+                  </tr>
+                  <tr className="tablerow">
+                    <td>
+                      <div></div>
+                    </td>
+                    <td className="tabledata">
+                      {error && (
+                        <>
+                          <small style={{ color: "red" }}>{error}</small>
+                          <br />
+                        </>
+                      )}
+                      {msg && (
+                        <>
+                          <small style={{ color: "green" }}>{msg}</small>
+                          <br />
+                        </>
+                      )}
+                      <div>
+                        <input
+                          className="cfm-button"
+                          type="button"
+                          value={closePopup ? "Close" : "Reset"}
+                          onClick={() => {
+                            handleResetPassword();
+                            if (closePopup) {
+                              close();
+                              window.location.reload();
+                            }
+                          }}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
+        </Popup>
+      </div>
     </div>
   );
 }

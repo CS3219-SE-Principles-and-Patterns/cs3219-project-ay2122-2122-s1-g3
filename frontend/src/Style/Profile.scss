@@ -1,151 +1,128 @@
-// @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
 
-// .Profile {
-//   background-color: hsl(0, 0%, 100%);
-//   display: flex;
-//   flex-direction: column;
-//   height: 100vh;
-//   width: 100%;
-//   padding: 5%;
-//   .field {
-//     display: flex;
-//     flex-direction: row;
-//     align-items: left;
-//     font-family: "Montserrat";
-//     font-weight: 600;
-//     font-size: 24px;
-//     color: #4e555d;
-//   }
-//   .reset-button {
-//     font-weight: 600;
-//     font-family: "Montserrat";
-//     font-size: 16px;
-//     letter-spacing: 1px;
-//     color: #e7ebf0;
-//     min-width: 24rem;
-//     height: 45px;
-//     padding: 0px 20px;
-//     background-color: #4e555d;
-//     border: 0;
-//     border-radius: 30px;
-//     margin-top: 10px;
-//     margin-bottom: 31px;
-//     cursor: pointer;
-//   }
-//   table {
-//     font-weight: 600;
-//     width: fit-content;
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  font-family: "Montserrat";
+  letter-spacing: 1px;
+  color: #cfcece;
+  width: 100%;
+  background-color: #4e555d;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
-//     label {
-//       background-color: blue;
-//       border-spacing: 50px;
-//     }
+.modal > .box {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #4e555d;
+  padding-right: 1em;
+  margin-right: -0.834em;
+  padding-left: 1em;
+  color: #dddddd;
+  font-family: "Montserrat";
+  letter-spacing: 1px;
 
-//     input {
-//       font-family: "Montserrat";
-//       min-width: 1em;
-//       height: 45px;
-//       padding: 0px 20px;
-//       font-size: 12px;
-//       letter-spacing: 1px;
-//       background-color: #e7ebf0;
-//       border: 0;
-//       border-radius: 30px;
-//       margin-top: 10px;
-//       margin-bottom: 31px;
-//     }
-//     input:focus {
-//       outline-color: #444a50;
-//     }
-//     input:active {
-//       color: #444a50;
-//     }
-//   }
-//   .modal {
-//     font-size: 12px;
-//   }
-//   .modal > .header {
-//     width: 100%;
-//     border-bottom: 1px solid gray;
-//     font-size: 18px;
-//     text-align: center;
-//     padding: 5px;
-//   }
-//   .modal > .content {
-//     width: 100%;
-//     padding: 10px 5px;
-//   }
-//   .modal > .actions {
-//     width: 100%;
-//     padding: 10px 5px;
-//     margin: auto;
-//     text-align: center;
-//   }
-//   .modal > .close {
-//     cursor: pointer;
-//     position: absolute;
-//     display: block;
-//     padding: 2px 5px;
-//     line-height: 20px;
-//     right: -10px;
-//     top: -10px;
-//     font-size: 24px;
-//     background: #ffffff;
-//     border-radius: 18px;
-//     border: 1px solid #cfcece;
-//   }
-// }
-
-// .sub-form label {
-//   font-family: "Montserrat";
-//   font-size: 15px;
-//   letter-spacing: 1px;
-//   color: #4e555d;
-//   font-weight: 500;
-// }
-.Profile {
-  .field {
-  }
-  .reset-button {
-  }
-  .model {
-    .header {
-    }
-    label {
-    }
-    input {
-      font-family: "Montserrat";
-      min-width: 1em;
-      height: 45px;
-      padding: 0px 20px;
-      font-size: 12px;
-      letter-spacing: 1px;
-      background-color: #e7ebf0;
-      border: 0;
-      border-radius: 30px;
-      margin-top: 10px;
-      margin-bottom: 31px;
-    }
-    table {
-      .cfm-button {
-        background-color: red($color: #000000);
-        input {
+  .tablebody {
+    .tablerow {
+      padding-bottom: 2em;
+      .tabledata {
+        .input {
           font-weight: 600;
           font-family: "Montserrat";
           font-size: 16px;
           letter-spacing: 1px;
-          color: #e7ebf0;
-          min-width: 24rem;
-          height: 45px;
-          padding: 0px 20px;
-          background-color: #4e555d;
+          color: #4e555d;
+          width: 10rem;
+          height: 30px;
+          padding: 0px 10px;
+          background-color: #e7ebf0;
           border: 0;
           border-radius: 30px;
-          margin-top: 10px;
-          margin-bottom: 31px;
+          margin: 5px 5px;
+          cursor: pointer;
+        }
+        input:focus {
+          outline-color: #444a50;
+        }
+        input:active {
+          color: #444a50;
+        }
+
+        .cfm-button {
+          font-weight: 600;
+          font-family: "Montserrat";
+          font-size: 14spx;
+          letter-spacing: 1px;
+          color: #4e555d;
+          width: 4rem;
+          height: 30px;
+          background-color: #e7ebf0;
+          border: 0;
+          border-radius: 10px;
+          margin-top: 5px;
+          margin-bottom: 10px;
+          border: 3px rgba($color: #868686, $alpha: 0.4);
+          border-style: outset;
+          border-radius: 10px;
           cursor: pointer;
         }
       }
     }
   }
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+.popup {
+  .reset-button {
+    font-weight: 600;
+    font-family: "Montserrat";
+    font-size: 14spx;
+    letter-spacing: 1px;
+    color: #4e555d;
+    width: 10rem;
+    height: 30px;
+    //background-color: #e7ebf0;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 3px rgba($color: #868686, $alpha: 0.4);
+    border-style: outset;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
+.profile {
+  background-color: #e7ebf0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
