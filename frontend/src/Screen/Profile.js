@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { getUser, getToken } from "../Utils/Common";
+import { getUser, getToken, removeUserSession } from "../Utils/Common";
 import "../Style/Profile.scss";
 import Popup from "reactjs-popup";
 import avatar from "./avatar.png";
@@ -72,8 +72,23 @@ function Profile(props) {
       setError(error.response.data.message);
     });
 
+  // handle click event of logout button
+  const handleLogout = () => {
+    removeUserSession();
+    props.history.push("/login");
+  };
+
+  // handle click event of home button
+  const handleProfile = () => {
+    props.history.push("/home");
+  };
+
   return (
     <div className="profile">
+      <div className="buttons">
+        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleProfile}>Home</button>
+      </div>
       <img src={avatar} alt="avatar" width="70" />
 
       <div className="field">

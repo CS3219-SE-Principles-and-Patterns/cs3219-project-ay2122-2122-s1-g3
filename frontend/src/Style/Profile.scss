@@ -1,5 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,200;1,300;1,400;1,500&family=Nanum+Pen+Script&display=swap");
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  button {
+    font-weight: 600;
+    font-family: "Montserrat";
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #4e555d;
+    min-width: 4rem;
+    height: 45px;
+    padding: 0px 20px;
+    background-color: #e7ebf0;
+    border: 3px rgba($color: #ffffff, $alpha: 0.8);
+    border-style: outset;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #ffffff;
+  }
+}
 .modal > .header {
   font-family: "Montserrat";
   letter-spacing: 1px;
@@ -104,19 +128,21 @@
 .reset-button {
   font-weight: 600;
   font-family: "Montserrat";
-  font-size: 14spx;
+  font-size: 20px;
   letter-spacing: 1px;
   color: #4e555d;
-  width: 10rem;
-  height: 30px;
-  border: 0;
-  border-radius: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 3px rgba($color: #868686, $alpha: 0.4);
+  min-width: 4rem;
+  height: 45px;
+  padding: 0px 20px;
+  background-color: #e7ebf0;
+  border: 3px rgba($color: #ffffff, $alpha: 0.8);
   border-style: outset;
   border-radius: 10px;
+  margin: 10px;
   cursor: pointer;
+}
+.reset-button:hover {
+  background-color: #ffffff;
 }
 
 .profile {
@@ -125,7 +151,6 @@
   height: 100%;
   width: 100%;
   text-align: center;
-  padding-top: 5rem;
 }
 
 .field {
@@ -133,8 +158,8 @@
   letter-spacing: 1px;
   color: #4e555d;
   width: 100%;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   margin-top: 2rem;
@@ -145,5 +170,6 @@
   margin-left: auto;
   margin-right: auto;
   height: 5rem;
+  width: 19%;
   margin-bottom: 10px;
 }
