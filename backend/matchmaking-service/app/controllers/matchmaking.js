@@ -131,7 +131,16 @@ function startMatchmakingHandler(properties, ds_manager, req, res){
      If no to all of these ^ then I'll enqueue you.
 
   */
-  var mmr = req.body.mmr;
+  var mmr = req.body.difficulty;
+  if (mmr === "0") {
+    mmr = 10;
+  } else if (mmr === "1") {
+    mmr = 900;
+  } else if (mmr === "2") {
+    mmr = 1300;
+  } else {
+    mmr = mmr;
+  }
   var id = req.body.id;
   var bin_key = ds_manager.getBinKey(mmr);
   var paired_id = ds_manager.pairing_manager.hasBeenDequeued(id)
