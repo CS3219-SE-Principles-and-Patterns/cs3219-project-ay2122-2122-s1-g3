@@ -13,9 +13,10 @@ function Home(props) {
   //TODO: Not sure how to get id/jwt token of user
   //TODO: keep random userId?
   const userId = Math.floor(Math.random() * 10000).toString();
-  const [meetingId, setMeetingId] = useState("");
   const seconds = new Date().getSeconds()
   const handleSubmit = async (e) => {
+    let meetingId;
+    let qn_num;
     e.preventDefault();
     setLoading(true);
     try {
@@ -32,8 +33,7 @@ function Home(props) {
               "Content-Type": "application/json",
             },
           }
-        )
-        .then((r) => console.log(r));
+        );
       // 2. Send /start
       //   => this adds current id and difficulty to the queue
       //   - Call once at the start of matchmaking
@@ -45,8 +45,7 @@ function Home(props) {
             Authorization: "Bearer xxxxxxxxxxxxxxxxxxx",
             "Content-Type": "application/json",
           },
-        })
-        .then((r) => console.log(r));
+        });
 
       // 3. Send /status
       //   => this retrieves the status of whether a match has been found or not
@@ -68,7 +67,8 @@ function Home(props) {
         });
         if (res.data.response === "A match was found") {
           //Need meeting id and QUESTION TO DO
-          setMeetingId(res.data.meeting_id);
+          meetingId = res.data.meeting_id;
+          qn_num = res.data.qn_num;
           foundMatch = true;
         }
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -81,11 +81,18 @@ function Home(props) {
           Authorization: "Bearer xxxxxxxxxxxxxxxxxxx",
           "Content-Type": "application/json",
         },
-      }).then(r => console.log(r))
+      })
 
       if (foundMatch) {
         // push all the relevant data into room
-        props.history.push("/room");
+        props.history.push({
+          pathname: '/room',
+          state: {
+            roomId: meetingId,
+            qn_num: qn_num,
+            difficulty: difficulty.value
+          }
+      });
       } else {
         setTryAgain(true);
       }
