@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: backend/user-managment/package-lock.json
+        cache-dependency-path: backend/user-management/package-lock.json
     - run: npm install
       working-directory: ./backend/user-management
     - run: npm test
