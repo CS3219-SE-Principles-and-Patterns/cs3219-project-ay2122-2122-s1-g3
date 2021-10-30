@@ -217,7 +217,7 @@ function updateStatusHandler(properties, ds_manager, req, res){
   }
   else{
     ds_manager.removeQueuedInfo(id);
-    return res.status(404).json({response:'You are not matched yet or not queued. \
+    return res.status(200).json({response:'You are not matched yet or not queued. \
       You will now be removed from the queue.'})
   }
 
