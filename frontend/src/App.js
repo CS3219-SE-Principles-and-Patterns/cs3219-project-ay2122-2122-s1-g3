@@ -39,8 +39,8 @@ function App() {
             <Switch>
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
-              <PrivateRoute path="/home" component={Home} />
-              <PrivateRoute path="/room" component={Room} />
+              <PublicRoute path="/home" component={Home} />
+              <PublicRoute path="/room" component={Room} />
               <PrivateRoute path="/profile" component={Profile} />
             </Switch>
           </div>

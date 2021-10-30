@@ -2,7 +2,7 @@ import "./questionSectionStyle.scss";
 import { Video } from "./video";
 import questions from "../Utils/Questions";
 export const QuestionSection = (props) => {
-  let {qn_num, roomId, difficulty} = props
+  let {qn_num, roomId, difficulty, setVideoSocket} = props
   difficulty = difficulty === "0" ? "easy" : difficulty === "1" ? "medium" : "hard"
   qn_num = parseInt(qn_num) % questions[difficulty].length
   const {title, body} = questions[difficulty][qn_num]
@@ -22,7 +22,7 @@ export const QuestionSection = (props) => {
           </h6>
         </div>
       </div>
-      <Video roomId={roomId} />
+      <Video roomId={roomId} setVideoSocket={setVideoSocket}/>
     </div>
   );
 };
