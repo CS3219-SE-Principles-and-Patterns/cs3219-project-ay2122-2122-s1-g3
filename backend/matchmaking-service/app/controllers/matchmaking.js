@@ -216,8 +216,9 @@ function updateStatusHandler(properties, ds_manager, req, res){
     return res.status(200).json({response:'You may now restart matchmaking service.'})
   }
   else{
+    ds_manager.removeQueuedInfo(id);
     return res.status(404).json({response:'You are not matched yet or not queued. \
-      Check your status to make sure you are queued first, and then wait to be matched.'})
+      You will now be removed from the queue.'})
   }
 
 }
