@@ -39,6 +39,7 @@ jobs:
         env:
           REDIS_HOST: redis
           REDIS_PORT: 6379
+          MONGO_URI: mongodb+srv://cs3219-group-03-users:gMH1ZmEJ0xsI1TVQ@cs3219-group-03.hdbva.mongodb.net/cs3219-user-management-db
 
   # build:
 

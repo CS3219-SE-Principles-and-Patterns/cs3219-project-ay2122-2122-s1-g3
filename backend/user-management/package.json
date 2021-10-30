@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "nodemon index.js",
     "start": "node src/index.js",
-    "test": "mocha ./tests/* --exit"
+    "test": "mocha ./tests/* --timeout 10000 --exit"
   },
   "author": "CS3219 Group 3",
   "license": "ISC",
