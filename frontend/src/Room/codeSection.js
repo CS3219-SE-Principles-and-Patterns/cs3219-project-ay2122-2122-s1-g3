@@ -1,16 +1,12 @@
 import "./codeSectionStyle.scss";
+import { getUser, removeUserSession } from "../Utils/Common";
 import { Editor } from "./editor";
 
-export const CodeSection = () => {
+export const CodeSection = (props) => {
+  const {handleExit} = props
   return (
     <div className="CodeSection">
-      <div className="codeHeader">
-        <div className="nextButtonWrapper">
-          <button>Exit</button>
-        </div>
-        <div className="questionTitle">Your Code</div>
-      </div>
-      <Editor />
+      <Editor roomId={props.roomId} handleExit={handleExit}/>
     </div>
   );
 };

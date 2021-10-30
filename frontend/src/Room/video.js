@@ -12,7 +12,7 @@ import {
   FaMicrophoneSlash,
 } from "react-icons/fa";
 let socket
-export const Video = () => {
+export const Video = (props) => {
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
   const [camOn, setCamOn] = useState(true);
@@ -29,8 +29,8 @@ export const Video = () => {
   const userVideo = useRef();
   const connectionRef = useRef();
   //TODO: Use real username or jwt token
-  const username = Math.floor(Math.random() * 100 + 1).toString();
-  const roomId = "1";
+  const username = Math.floor(Math.random() * 100000).toString();
+  const {roomId} = props;
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

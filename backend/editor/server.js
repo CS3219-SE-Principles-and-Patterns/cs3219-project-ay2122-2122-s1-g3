@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
 
     const roomName = `ROOM:${roomId}`
     io.in(roomName).emit('ROOM:CONNECTION', newUsers)
+    io.in(roomName).emit('ROOM:PARTNER_DISCONNECTED')
   })
 })
 
