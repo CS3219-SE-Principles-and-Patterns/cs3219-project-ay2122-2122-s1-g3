@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { setUserSession } from "../Utils/Common";
 import "../Style/LoginSignup.scss";
-import PeerPrep from "./PeerPrep";
 
 function Login(props) {
   const email = useFormInput("");
@@ -15,7 +14,7 @@ function Login(props) {
     setError(null);
     setLoading(true);
     axios
-      .post("", {
+      .post("http://localhost:4000/auth/signin", {
         email: email.value,
         password: password.value,
       })
@@ -26,9 +25,7 @@ function Login(props) {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.status === 401)
-          setError(error.response.data.message);
-        else setError("Something went wrong. Please try again later. :(");
+        setError(error.response.data.message);
       });
   };
 
