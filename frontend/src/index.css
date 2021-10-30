@@ -12,11 +12,7 @@ code {
     monospace;
 }
 
-.content {
-}
-
 .header {
-  margin: 0;
   padding: 10px;
   background: #edf2f4;
   border-bottom: 1px solid #999;

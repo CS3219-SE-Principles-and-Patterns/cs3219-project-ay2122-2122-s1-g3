@@ -11,10 +11,7 @@ import {
   FaVideoSlash,
   FaMicrophoneSlash,
 } from "react-icons/fa";
-
-const socket = io("http://localhost:3001/", {
-  transports: ["websocket"],
-});
+let socket
 export const Video = () => {
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
@@ -37,6 +34,9 @@ export const Video = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    socket = io("http://localhost:3001/", {
+      transports: ["websocket"],
+    });
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
@@ -69,7 +69,7 @@ export const Video = () => {
 
   const callUser = () => {
     setCallEnded(false);
-    setCallingUser(true)
+    setCallingUser(true);
     const id = users.filter((u) => u.socketID !== me)[0].socketID;
     const peer = new Peer({
       initiator: true,
@@ -89,7 +89,7 @@ export const Video = () => {
     });
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
-      setCallingUser(false)
+      setCallingUser(false);
       peer.signal(signal);
     });
 
@@ -148,7 +148,7 @@ export const Video = () => {
           )}
         </button>
         <button className="microhphoneButton">
-        {micOn ? (
+          {micOn ? (
             <FaMicrophone onClick={toggleMic} />
           ) : (
             <FaMicrophoneSlash onClick={toggleMic} />
@@ -186,8 +186,10 @@ export const Video = () => {
             <FaPhoneVolume />
           </button>
         ) : callingUser ? (
-          <span>Calling User <FaPhoneVolume /></span>
-        ) :(
+          <span>
+            Calling User <FaPhoneVolume />
+          </span>
+        ) : (
           <button className="callButton" onClick={callUser}>
             <FaPhone />
           </button>

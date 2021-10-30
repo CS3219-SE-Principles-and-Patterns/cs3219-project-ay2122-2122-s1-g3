@@ -96,6 +96,14 @@ class DataStoreManager{
     return dequeued
   }
 
+  getYourselfOut(bin_key, id){
+    // If you are at the top of queue, please dequeue yourself
+    if (this.isQueueHead(bin_key, id)){
+      this.dequeueFromBin(bin_key);
+    }
+  
+  }
+
   enqueueId(bin_key, id, mmr){
     // Don't re-enqueue yourself
     if (!this.searcher_manager.getEnqueued(id)){
@@ -152,7 +160,7 @@ function startMatchmakingHandler(properties, ds_manager, req, res){
     return res.status(200).json({response:'You were already queued, also, someone has matched with you'})
   }
   if (is_queued){
-    return res.status(403).json({response: 'You are already queued. Please wait for a match to be found.'})
+    return res.status(202).json({response: 'You are already queued. Please wait for a match to be found.'})
   }
 
   else{
@@ -184,7 +192,7 @@ function statusHandler(properties, ds_manager, req, res){
     var other = competitor_matched;
 
     var final;
-
+    var idSum = parseInt(mine) + parseInt(other);
     if (mine < other) {
       final = mine + other;
     } else {
@@ -193,12 +201,11 @@ function statusHandler(properties, ds_manager, req, res){
 
     final = uuidv5('dns', final);
 
-
-    return res.status(200).json({response:'A match was found', competitor_id:competitor_matched, meeting_id:final });
+    return res.status(200).json({response:'A match was found', competitor_id:competitor_matched, meeting_id:final, qn_num:idSum});
   }
 
   else if (!is_queued){
-    return res.status(404).json({response:'You were not found in our searching players pool.' });
+    return res.status(202).json({response:'You were not found in our searching players pool.' });
   }
 
   else{
@@ -211,13 +218,16 @@ function updateStatusHandler(properties, ds_manager, req, res){
   // Will remove you from matched/searching players
   // Once this is called, a player can restart matchmaking
   var id = req.body.id;
+  var difficulty = req.body.difficulty;
+  var bin_key = ds_manager.getBinKey(difficulty);
   if (ds_manager.pairing_manager.hasBeenDequeued(id)){
     ds_manager.removeQueuedInfo(id);
     return res.status(200).json({response:'You may now restart matchmaking service.'})
   }
   else{
+    ds_manager.getYourselfOut(bin_key, id)
     ds_manager.removeQueuedInfo(id);
-    return res.status(200).json({response:'You are not matched yet or not queued. \
+    return res.status(202).json({response:'You are not matched yet or not queued. \
       You will now be removed from the queue.'})
   }
 
