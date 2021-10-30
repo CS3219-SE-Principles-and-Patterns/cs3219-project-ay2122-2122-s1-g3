@@ -21,7 +21,7 @@ function Home(props) {
     props.history.push("/login");
   };
 
-  // handle click event of logout button
+  // handle click event of profile button
   const handleProfile = () => {
     props.history.push("/profile");
   };
