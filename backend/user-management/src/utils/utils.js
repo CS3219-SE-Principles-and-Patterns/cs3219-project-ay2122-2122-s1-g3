@@ -4,7 +4,8 @@ const moment = require("moment");
 const ms = require("ms");
 const redis = require("redis");
 const redisClient = redis.createClient({
-  url: process.env.REDIS_URL,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 });
 
 // Generate token
