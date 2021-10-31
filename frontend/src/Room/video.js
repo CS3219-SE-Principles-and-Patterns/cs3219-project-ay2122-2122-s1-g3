@@ -30,13 +30,13 @@ export const Video = (props) => {
   const connectionRef = useRef();
   //TODO: Use real username or jwt token
   const username = Math.floor(Math.random() * 100000).toString();
-  const {roomId} = props;
+  const {roomId, setVideoSocket} = props;
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
     socket = io("http://localhost:3001/", {
       transports: ["websocket"],
     });
+    setVideoSocket(socket)
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
