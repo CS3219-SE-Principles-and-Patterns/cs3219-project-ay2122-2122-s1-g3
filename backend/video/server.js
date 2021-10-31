@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", async () => {
     // Not sure about the line below
-    //socket.broadcast.emit("callEnded");
+    socket.broadcast.emit("partnerLeft");
     const { roomId, username } = await client.hGetAll(`video:${socket.id}`);
     const roomName = `ROOM:VIDEO:${roomId}`;
     io.in(roomName).emit("callEnded");
