@@ -19,8 +19,6 @@ services:
       - user-management-network
     depends_on:
       - user-management-redis
-    environment:
-      - REDIS_URL=redis://user-management-redis:6379
 
 networks:
   user-management-network:
