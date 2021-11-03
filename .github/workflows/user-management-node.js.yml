@@ -5,31 +5,62 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [UserManagement]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-  build:
-
+  container-job:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    container: node:14-alpine
+    services:
+      redis:
+        image: redis
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: backend/user-managment/package-lock.json
-    - run: npm install
-      working-directory: ./backend/user-management
-    - run: npm test
-      working-directory: ./backend/user-management
-      env:
-        CI: true
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: backend/user-management/package-lock.json
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend/user-management
+      - name: Run Test
+        run: npm test
+        working-directory: ./backend/user-management
+        env:
+          REDIS_HOST: redis
+          REDIS_PORT: 6379
+          MONGO_URI: mongodb+srv://cs3219-group-03-users:gMH1ZmEJ0xsI1TVQ@cs3219-group-03.hdbva.mongodb.net/cs3219-user-management-db
+
+  # build:
+
+  #   runs-on: ubuntu-latest
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v2
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
+  #       cache: 'npm'
+  #       cache-dependency-path: backend/user-management/package-lock.json
+  #   - run: npm install
+  #     working-directory: ./backend/user-management
+  #   - run: npm test
+  #     working-directory: ./backend/user-management
+  #     env:
+  #       CI: true
