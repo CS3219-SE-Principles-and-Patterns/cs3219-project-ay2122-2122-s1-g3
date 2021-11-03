@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-management-redis-deployment
+  labels:
+    app: user-management-redis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-management-redis
+  template:
+    metadata:
+      labels:
+        app: user-management-redis
+    spec:
+      containers:
+      - name: user-management-redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
