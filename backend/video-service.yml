@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-service
+spec:
+  selector:
+    app: video-deployment
+  type: ClusterIP
+  ports:
+   -  protocol: TCP
+      # Listens on port 3001, forwards request to video deployment's port 3001
+      port: 3001
+      targetPort: 3001
