@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { setUserSession } from "../Utils/Common";
 import "../Style/LoginSignup.scss";
+require("dotenv").config();
 
 function Login(props) {
   const email = useFormInput("");
@@ -14,7 +15,7 @@ function Login(props) {
     setError(null);
     setLoading(true);
     axios
-      .post("http://localhost:4000/auth/signin", {
+      .post(process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin", {
         email: email.value,
         password: password.value,
       })
