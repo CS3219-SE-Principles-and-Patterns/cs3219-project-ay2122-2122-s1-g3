@@ -17,7 +17,7 @@ spec:
       containers:
       - name: editor-deployment
       #TODO: confirm image with Niaaz
-        image: geniaaz/editor-deployment:latest
+        image: geniaaz/peerprep_backend_editor:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3002

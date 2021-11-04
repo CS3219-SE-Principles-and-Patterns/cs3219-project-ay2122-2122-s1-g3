@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend-deployment
-      #TODO: confirm image with Niaaz
-        image: geniaaz/frontend-deployment:latest
+        image: geniaaz/peerprep_frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

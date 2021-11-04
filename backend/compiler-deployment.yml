@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: compiler-deployment
-      #TODO: confirm image with Niaaz
-        image: geniaaz/compiler-deployment:latest
+        image: geniaaz/peerprep_backend_compiler:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000

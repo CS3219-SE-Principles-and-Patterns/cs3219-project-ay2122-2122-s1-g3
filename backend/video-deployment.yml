@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: video-deployment
-      #TODO: confirm image with Niaaz
-        image: geniaaz/video-deployment:latest
+        image: geniaaz/peerprep_backend_video:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3001

@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: matchmaking-deployment
-      #TODO: confirm image with Niaaz
-        image: geniaaz/matchmaking-deployment:latest
+        image: geniaaz/peerprep_backend_matchmaking:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8099
