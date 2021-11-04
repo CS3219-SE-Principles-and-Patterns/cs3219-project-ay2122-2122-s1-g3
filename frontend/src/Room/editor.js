@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material-ocean.css";
-import "codemirror/mode/javascript/javascript";
+import "codemirror/mode/python/python";
 import "codemirror/keymap/sublime";
 import CodeMirror from "codemirror";
 import io from "socket.io-client";
-//import { Controlled as ControlledEditor } from "react-codemirror2";
+import { Terminal } from "./terminal";
 import "./editorStyle.scss";
-
-export const Editor = () => {
+let socket;
+export const Editor = (props) => {
   const [users, setUsers] = useState([]);
+  const [stdOut, setStdOut] = useState("");
+  const language = "py";
   const [editorCode, setEditorCode] = useState("");
   //TODO: Use real username or jwt token
-  const username = Math.floor(Math.random() * 100 + 1).toString();
-  const roomId = "1";
+  const username = Math.floor(Math.random() * 100000).toString();
+  const { roomId, handleExit } = props;
 
   useEffect(() => {
     const editor = CodeMirror.fromTextArea(document.getElementById("ds"), {
       lineNumbers: true,
       keyMap: "sublime",
       theme: "material-ocean",
-      mode: "javascript",
+      mode: "python",
     });
 
     // const bookMark = editor.setBookmark({ line: 1, pos: 1 }, { widget })
     // widget.onclick = () => bookMark.clear()
     // console.log(editor.getAllMarks())
 
-    const socket = io("http://localhost:3001/", {
+    socket = io("http://localhost:3002/", {
       transports: ["websocket"],
     });
 
     socket.on("CODE_CHANGED", (code) => {
       editor.setValue(code);
-      setEditorCode(code)
+      setEditorCode(code);
     });
 
     socket.on("connect_error", (err) => {
@@ -50,14 +53,18 @@ export const Editor = () => {
 
     socket.on("ROOM:CONNECTION", (users) => {
       setUsers(users);
-      console.log(users);
+    });
+
+    socket.on("ROOM:PARTNER_DISCONNECTED", () => {
+      console.log("partner exited");
+      handleExitEditor();
     });
 
     editor.on("change", (instance, changes) => {
       const { origin } = changes;
       // if (origin === '+input' || origin === '+delete' || origin === 'cut') {
       if (origin !== "setValue") {
-        setEditorCode(instance.getValue())
+        setEditorCode(instance.getValue());
         socket.emit("CODE_CHANGED", instance.getValue());
       }
     });
@@ -69,13 +76,41 @@ export const Editor = () => {
       socket.emit("DISSCONNECT_FROM_ROOM", { roomId, username });
     };
   }, []);
-
+  const handleSubmit = async () => {
+    const payload = {
+      language: language,
+      code: editorCode,
+    };
+    console.log(payload);
+    try {
+      setStdOut("");
+      const { data } = await axios.post("http://localhost:5000/run", payload);
+      setStdOut(data.output);
+    } catch ({ response }) {
+      const errMsg = response.data.err.stderr;
+      setStdOut(errMsg);
+    }
+  };
+  const handleExitEditor = () => {
+    socket.disconnect()
+    handleExit()
+  };
   return (
-    <div className="Editor">
-      <textarea className="textInput" id="ds" />
-      <div className="runCodeButtonWrapper">
-        <button>Run Code</button>
+    <>
+      <div className="codeHeader">
+        <div className="nextButtonWrapper">
+          <button onClick={handleExitEditor}>Exit</button>
+        </div>
+        <div className="questionTitle">Your Code</div>
       </div>
-    </div>
+      <div className="Editor">
+        <textarea className="textInput" id="ds" />
+        <div className="runCodeButtonWrapper">
+          <button onClick={handleSubmit}>Run Code</button>
+        </div>
+      </div>
+      <div className="terminalHeader">Standard Output</div>
+      <Terminal stdOut={stdOut} />
+    </>
   );
 };

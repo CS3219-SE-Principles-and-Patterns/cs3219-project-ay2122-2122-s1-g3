@@ -79,9 +79,10 @@ io.on('connection', (socket) => {
 
     const roomName = `ROOM:${roomId}`
     io.in(roomName).emit('ROOM:CONNECTION', newUsers)
+    io.in(roomName).emit('ROOM:PARTNER_DISCONNECTED')
   })
 })
 
-server.listen(3001, () => {
-  console.log(greenBright.bold('listening on *:3001'))
+server.listen(3002, () => {
+  console.log(greenBright.bold('listening on *:3002'))
 })

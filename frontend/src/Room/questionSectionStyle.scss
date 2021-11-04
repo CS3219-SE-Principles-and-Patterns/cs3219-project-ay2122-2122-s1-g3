@@ -9,25 +9,20 @@
         margin: 10%;
         .questionHeader {
             .nextButtonWrapper {
-                text-align: end;
-                button{
+                display: flex;
+                justify-content: space-between;
+                span{
                     font-weight: 600;
                     font-family: "Montserrat";
                     font-size: 16px;
                     letter-spacing: 1px;
-                    color: #4e555d;
+                    color: #457cbb;
                     min-width: 4rem;
                     height: 45px;
                     padding: 0px 20px;
                     background-color: #E7EBF0;
-                    border: 3px rgba($color: #FFFFFF, $alpha: 0.80);
-                    border-style: outset;
-                    border-radius: 10px;
                     margin-top: 10px;
-                    cursor: pointer;
-                }
-                button:hover {
-                    background-color: #f5f5f5;
+                    padding: 0;
                 }
             }
 
