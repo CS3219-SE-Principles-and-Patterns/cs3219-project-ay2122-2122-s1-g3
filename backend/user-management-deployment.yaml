@@ -25,16 +25,6 @@ spec:
             configMapKeyRef:
               key: ACCESS_TOKEN_LIFE
               name: user-management-configure-map
-        - name: JWT_SECRET
-          valueFrom:
-            configMapKeyRef:
-              key: JWT_SECRET
-              name: user-management-configure-map
-        - name: MONGO_URI
-          valueFrom:
-            secretKeyRef:
-              key: MONGO_URI
-              name: user-management-secret
         - name: REDIS_EXPIRATION
           valueFrom:
             configMapKeyRef:
@@ -50,3 +40,14 @@ spec:
             configMapKeyRef:
               key: REDIS_PORT
               name: user-management-configure-map
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: JWT_SECRET
+              name: user-management-configure-map
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              key: MONGO_URI
+              name: user-management-secret
+       
