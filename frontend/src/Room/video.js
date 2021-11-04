@@ -11,6 +11,8 @@ import {
   FaVideoSlash,
   FaMicrophoneSlash,
 } from "react-icons/fa";
+require("dotenv").config();
+
 let socket
 export const Video = (props) => {
   const [me, setMe] = useState("");
@@ -33,7 +35,7 @@ export const Video = (props) => {
   const {roomId, setVideoSocket} = props;
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    socket = io("http://localhost:3001/", {
+    socket = io(process.env.VIDEO_URL || "http://localhost:3001/", {
       transports: ["websocket"],
     });
     setVideoSocket(socket)
