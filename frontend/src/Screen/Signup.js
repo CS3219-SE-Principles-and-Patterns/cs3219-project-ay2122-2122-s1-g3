@@ -3,6 +3,7 @@ import axios from "axios";
 import { setUserSession } from "../Utils/Common";
 import "../Style/LoginSignup.scss";
 import validator from "validator";
+require("dotenv").config();
 
 function Signup(props) {
   const username = useFormInput("");
@@ -41,7 +42,7 @@ function Signup(props) {
       return;
     }
     axios
-      .post("http://localhost:4000/auth/signup", {
+      .post(process.env.SIGN_UP_URL || "http://localhost:4000/auth/signup", {
         email: email.value,
         password: password.value,
         username: username.value,
@@ -49,7 +50,7 @@ function Signup(props) {
       .then((response) => {
         setLoading(false);
         axios
-          .post("http://localhost:4000/auth/signin", {
+          .post(process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin", {
             email: email.value,
             password: password.value,
           })
