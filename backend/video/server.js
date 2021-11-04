@@ -5,14 +5,19 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const { createClient } = require("redis");
+require("dotenv").config();
+
 const io = require("socket.io")(server, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: "*",
 		methods: [ "GET", "POST" ]
 	}
 })
-
-const client = createClient();
+app.use(cors())
+const client = createClient({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+})
 client.on("error", console.error);
 client
   .connect()

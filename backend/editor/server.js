@@ -9,10 +9,14 @@ const { createClient } = require('redis')
 const { v4 } = require('uuid')
 const moment = require('moment')
 const { json } = require('body-parser')
+require("dotenv").config();
 
 const { blueBright, greenBright, redBright } = require('chalk')
 
-const client = createClient()
+const client = createClient({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+})
 app.use(json())
 app.use(cors())
 

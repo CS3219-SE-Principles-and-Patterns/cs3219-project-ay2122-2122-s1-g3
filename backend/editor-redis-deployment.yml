@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: editor-redis-deployment
+  labels:
+    app: editor-redis-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: editor-redis-deployment
+  template:
+    metadata:
+      labels:
+        app: editor-redis-deployment
+    spec:
+      containers:
+      - name: editor-redis-deployment
+        image: redis:latest
+        ports:
+        - containerPort: 6379
