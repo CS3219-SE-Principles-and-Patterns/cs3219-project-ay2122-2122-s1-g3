@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-deployment
+  labels:
+    app: video-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: video-deployment
+  template:
+    metadata:
+      labels:
+        app: video-deployment
+    spec:
+      containers:
+      - name: video-deployment
+        image: geniaaz/peerprep_backend_video:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3001
+          protocol: TCP
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_HOST
+              name: video-configure-map
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_PORT
+              name: video-configure-map

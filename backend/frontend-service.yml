@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend-deployment
+  type: LoadBalancer
+  ports:
+   -  protocol: TCP
+      # Listens on port 80, forwards request to frontend deployment's port 3000
+      port: 80
+      targetPort: 3000

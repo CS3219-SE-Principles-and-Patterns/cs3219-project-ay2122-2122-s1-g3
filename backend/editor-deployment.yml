@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: editor-deployment
+  labels:
+    app: editor-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: editor-deployment
+  template:
+    metadata:
+      labels:
+        app: editor-deployment
+    spec:
+      containers:
+      - name: editor-deployment
+      #TODO: confirm image with Niaaz
+        image: geniaaz/peerprep_backend_editor:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3002
+          protocol: TCP
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_HOST
+              name: editor-configure-map
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_PORT
+              name: editor-configure-map

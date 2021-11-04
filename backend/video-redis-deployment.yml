@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-redis-deployment
+  labels:
+    app: video-redis-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: video-redis-deployment
+  template:
+    metadata:
+      labels:
+        app: video-redis-deployment
+    spec:
+      containers:
+      - name: video-redis-deployment
+        image: redis:latest
+        ports:
+        - containerPort: 6379
