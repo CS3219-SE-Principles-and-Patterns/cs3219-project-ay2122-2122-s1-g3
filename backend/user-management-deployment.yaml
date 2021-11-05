@@ -44,7 +44,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: JWT_SECRET
-              name: user-management-configure-map
+              name: user-management-secret
         - name: MONGO_URI
           valueFrom:
             secretKeyRef:
