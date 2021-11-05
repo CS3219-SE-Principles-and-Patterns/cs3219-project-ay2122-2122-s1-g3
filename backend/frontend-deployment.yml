@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend-deployment
+  template:
+    metadata:
+      labels:
+        app: frontend-deployment
+    spec:
+      containers:
+      - name: frontend-deployment
+        image: geniaaz/peerprep_frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        env:
+        - name: SIGN_UP_URL
+          valueFrom:
+            configMapKeyRef:
+              key: SIGN_UP_URL
+              name: frontend-configure-map
+        - name: SIGN_IN_URL
+          valueFrom:
+            configMapKeyRef:
+              key: SIGN_IN_URL
+              name: frontend-configure-map
+        - name: MATCHMAKING_UPDATE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: MATCHMAKING_UPDATE_URL
+              name: frontend-configure-map
+        - name: MATCHMAKING_START_URL
+          valueFrom:
+            configMapKeyRef:
+              key: MATCHMAKING_START_URL
+              name: frontend-configure-map
+        - name: MATCHMAKING_STATUS_URL
+          valueFrom:
+            configMapKeyRef:
+              key: MATCHMAKING_STATUS_URL
+              name: frontend-configure-map
+        - name: EDITOR_URL
+          valueFrom:
+            configMapKeyRef:
+              key: EDITOR_URL
+              name: frontend-configure-map
+        - name: COMPILER_URL
+          valueFrom:
+            configMapKeyRef:
+              key: COMPILER_URL
+              name: frontend-configure-map
+        - name: VIDEO_URL
+          valueFrom:
+            configMapKeyRef:
+              key: VIDEO_URL
+              name: frontend-configure-map

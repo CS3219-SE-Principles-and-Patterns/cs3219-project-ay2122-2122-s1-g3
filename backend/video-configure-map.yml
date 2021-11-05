@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  # TODO: Not sure if need quotation marks
+  REDIS_HOST: video-redis-service
+  REDIS_PORT: "6379"
+metadata:
+  name: video-configure-map

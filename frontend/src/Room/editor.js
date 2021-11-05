@@ -8,6 +8,8 @@ import CodeMirror from "codemirror";
 import io from "socket.io-client";
 import { Terminal } from "./terminal";
 import "./editorStyle.scss";
+require("dotenv").config();
+
 let socket;
 export const Editor = (props) => {
   const [users, setUsers] = useState([]);
@@ -30,7 +32,7 @@ export const Editor = (props) => {
     // widget.onclick = () => bookMark.clear()
     // console.log(editor.getAllMarks())
 
-    socket = io("http://localhost:3002/", {
+    socket = io(process.env.EDITOR_URL || "http://localhost:3002/", {
       transports: ["websocket"],
     });
 
@@ -84,7 +86,7 @@ export const Editor = (props) => {
     console.log(payload);
     try {
       setStdOut("");
-      const { data } = await axios.post("http://localhost:5000/run", payload);
+      const { data } = await axios.post(process.env.COMPILER_URL || "http://localhost:5000/run", payload);
       setStdOut(data.output);
     } catch ({ response }) {
       const errMsg = response.data.err.stderr;

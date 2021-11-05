@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compiler-deployment
+  labels:
+    app: compiler-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: compiler-deployment
+  template:
+    metadata:
+      labels:
+        app: compiler-deployment
+    spec:
+      containers:
+      - name: compiler-deployment
+        image: geniaaz/peerprep_backend_compiler:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          protocol: TCP

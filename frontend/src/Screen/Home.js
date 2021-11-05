@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUser, removeUserSession } from "../Utils/Common";
 import axios from "axios";
 import "../Style/homeStyle.scss";
+require("dotenv").config();
 
 function Home(props) {
   //const category = useFormInput("Array");
@@ -24,7 +25,7 @@ function Home(props) {
       //   => this removes id from queue if inside, otherwise does nothing
       await axios
         .post(
-          "http://localhost:8099/update",
+          process.env.MATCHMAKING_UPDATE_URL || "http://localhost:8099/update",
           { id: userId, difficulty: difficulty.value},
           {
             headers: {
@@ -39,7 +40,7 @@ function Home(props) {
       //   - Call once at the start of matchmaking
       const body = { id: userId, difficulty: difficulty.value};
       await axios
-        .post("http://localhost:8099/start", body, {
+        .post(process.env.MATCHMAKING_START_URL || "http://localhost:8099/start", body, {
           headers: {
             // include real jwt token
             Authorization: "Bearer xxxxxxxxxxxxxxxxxxx",
@@ -55,7 +56,7 @@ function Home(props) {
         if (foundMatch) {
           break;
         }
-        let res = await axios.post("http://localhost:8099/status", {
+        let res = await axios.post(process.env.MATCHMAKING_STATUS_URL || "http://localhost:8099/status", {
           id: userId,
           difficulty: difficulty.value,
         }, {
@@ -75,7 +76,7 @@ function Home(props) {
       }
       // 4. Send /update
       //   - To reset queue again before leaving
-      await axios.post("http://localhost:8099/update", { id: userId, difficulty: difficulty.value}, {
+      await axios.post(process.env.MATCHMAKING_UPDATE_URL || "http://localhost:8099/update", { id: userId, difficulty: difficulty.value}, {
         headers: {
           // include real jwt token
           Authorization: "Bearer xxxxxxxxxxxxxxxxxxx",
