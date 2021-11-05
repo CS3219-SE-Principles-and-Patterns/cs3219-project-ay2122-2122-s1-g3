@@ -41,27 +41,27 @@ describe("Authentication APIs", () => {
       });
   });
 
-  it("Should login user with password, email", function (done) {
-    supertest(app)
-      .post("/auth/signin")
-      .send({
-        password: "SignUpTestCase",
-        email: "SignUpTestCase@gmail.com",
-      })
-      .expect(200)
-      .end(function (err, res) {
-        if (err) {
-          console.error(err);
-        }
-        res.status.should.equal(200);
-        assert(res.body.hasOwnProperty("user"));
-        assert(res.body.hasOwnProperty("token"));
-        assert(res.body.hasOwnProperty("expiredAt"));
+  // it("Should login user with password, email", function (done) {
+  //   supertest(app)
+  //     .post("/auth/signin")
+  //     .send({
+  //       password: "SignUpTestCase",
+  //       email: "SignUpTestCase@gmail.com",
+  //     })
+  //     .expect(200)
+  //     .end(function (err, res) {
+  //       if (err) {
+  //         console.error(err);
+  //       }
+  //       res.status.should.equal(200);
+  //       assert(res.body.hasOwnProperty("user"));
+  //       assert(res.body.hasOwnProperty("token"));
+  //       assert(res.body.hasOwnProperty("expiredAt"));
 
-        assert(res.body.user.username == "SignUpTestCase");
-        assert(res.body.user.email == "SignUpTestCase@gmail.com");
-        assert(res.body.user.isAdmin == false);
-        done();
-      });
-  });
+  //       assert(res.body.user.username == "SignUpTestCase");
+  //       assert(res.body.user.email == "SignUpTestCase@gmail.com");
+  //       assert(res.body.user.isAdmin == false);
+  //       done();
+  //     });
+  // });
 });

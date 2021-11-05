@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-management-deployment
+  labels:
+    app: user-management
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-management
+  template:
+    metadata:
+      labels:
+        app: user-management
+    spec:
+      containers:
+      - name: user-management
+        image: geniaaz/peerprep_user_management:latest
+        ports:
+        - containerPort: 4000
+        env:
+        - name: ACCESS_TOKEN_LIFE
+          valueFrom:
+            configMapKeyRef:
+              key: ACCESS_TOKEN_LIFE
+              name: user-management-configure-map
+        - name: REDIS_EXPIRATION
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_EXPIRATION
+              name: user-management-configure-map
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_HOST
+              name: user-management-configure-map
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: REDIS_PORT
+              name: user-management-configure-map
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: JWT_SECRET
+              name: user-management-secret
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              key: MONGO_URI
+              name: user-management-secret
+       
