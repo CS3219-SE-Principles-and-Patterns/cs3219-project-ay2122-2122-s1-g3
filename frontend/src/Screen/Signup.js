@@ -23,6 +23,11 @@ function Signup(props) {
       setError("Email cannot be empty.");
       return;
     }
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email.value)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
     if (password.value !== confirmPassword.value) {
       setError("Password does not match.");
       return;
@@ -50,10 +55,13 @@ function Signup(props) {
       .then((response) => {
         setLoading(false);
         axios
-          .post(process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin", {
-            email: email.value,
-            password: password.value,
-          })
+          .post(
+            process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin",
+            {
+              email: email.value,
+              password: password.value,
+            }
+          )
           .then((response) => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);
