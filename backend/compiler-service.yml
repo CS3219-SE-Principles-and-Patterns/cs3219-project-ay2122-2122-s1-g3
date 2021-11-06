@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: compiler-deployment
-  type: ClusterIP
+  type: LoadBalancer
   ports:
    -  protocol: TCP
       # Listens on port 5000, forwards request to compiler deployment's port 3000

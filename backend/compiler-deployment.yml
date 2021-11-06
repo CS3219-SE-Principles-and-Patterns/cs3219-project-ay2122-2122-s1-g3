@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: compiler-deployment
-        image: geniaaz/peerprep_backend_compiler:1.0.0
+        image: geniaaz/peerprep_backend_compiler:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 5000

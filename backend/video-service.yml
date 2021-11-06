@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: video-deployment
-  type: ClusterIP
+  type: LoadBalancer
   ports:
    -  protocol: TCP
       # Listens on port 3001, forwards request to video deployment's port 3001
