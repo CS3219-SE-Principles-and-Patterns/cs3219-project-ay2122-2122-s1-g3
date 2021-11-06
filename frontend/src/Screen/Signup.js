@@ -42,7 +42,7 @@ function Signup(props) {
       return;
     }
     axios
-      .post(process.env.SIGN_UP_URL || "http://localhost:4000/auth/signup", {
+      .post("user-management-service/auth/signup", {
         email: email.value,
         password: password.value,
         username: username.value,
@@ -50,7 +50,7 @@ function Signup(props) {
       .then((response) => {
         setLoading(false);
         axios
-          .post(process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin", {
+          .post("user-management-service/auth/signin", {
             email: email.value,
             password: password.value,
           })

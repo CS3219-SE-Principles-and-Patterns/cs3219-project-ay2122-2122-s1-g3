@@ -15,7 +15,7 @@ function Login(props) {
     setError(null);
     setLoading(true);
     axios
-      .post(process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin", {
+      .post("user-management-service/auth/signin", {
         email: email.value,
         password: password.value,
       })
