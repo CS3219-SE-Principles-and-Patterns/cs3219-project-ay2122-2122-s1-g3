@@ -32,7 +32,7 @@ export const Editor = (props) => {
     // widget.onclick = () => bookMark.clear()
     // console.log(editor.getAllMarks())
 
-    socket = io("editor-service/", {
+    socket = io("http://a899a5ec168bc415d8d7b6dcfb3080ec-103086270.ap-northeast-3.elb.amazonaws.com:3002/", {
       transports: ["websocket"],
     });
 
@@ -86,7 +86,7 @@ export const Editor = (props) => {
     console.log(payload);
     try {
       setStdOut("");
-      const { data } = await axios.post("compiler-service/run", payload);
+      const { data } = await axios.post("http://ace92696552254c3c94836c23551d1dc-537713883.ap-northeast-3.elb.amazonaws.com:5000/run", payload);
       setStdOut(data.output);
     } catch ({ response }) {
       const errMsg = response.data.err.stderr;
