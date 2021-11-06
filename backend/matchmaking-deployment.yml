@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matchmaking-deployment
+  labels:
+    app: matchmaking-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: matchmaking-deployment
+  template:
+    metadata:
+      labels:
+        app: matchmaking-deployment
+    spec:
+      containers:
+      - name: matchmaking-deployment
+        image: geniaaz/peerprep_backend_matchmaking:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8099
+          protocol: TCP

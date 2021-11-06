@@ -11,10 +11,10 @@ services:
   user-management:
     container_name: user-management
     restart: unless-stopped
-    build: ./user-management
+    build: ./backend/user-management
     ports:
       - "4000:4000"
-    env_file: ./user-management/.env
+    env_file: ./backend/user-management/.env
     networks:
       - user-management-network
     depends_on:

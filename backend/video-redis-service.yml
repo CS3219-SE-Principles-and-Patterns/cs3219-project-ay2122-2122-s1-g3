@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-redis-service
+spec:
+  selector:
+    app: video-redis-deployment
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

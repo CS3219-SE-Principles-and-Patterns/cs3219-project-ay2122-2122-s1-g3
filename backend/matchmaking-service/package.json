@@ -20,5 +20,8 @@
     "request-promise-native": "^1.0.5",
     "sinon": "^4.3.0",
     "uuidv5": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }

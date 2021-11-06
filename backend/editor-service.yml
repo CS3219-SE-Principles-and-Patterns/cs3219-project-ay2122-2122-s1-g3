@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: editor-service
+spec:
+  selector:
+    app: editor-deployment
+  type: ClusterIP
+  ports:
+   -  protocol: TCP
+      # Listens on port 3002, forwards request to editor deployment's port 3002
+      port: 3002
+      targetPort: 3002
