@@ -14,8 +14,8 @@ require("dotenv").config();
 const { blueBright, greenBright, redBright } = require('chalk')
 
 const client = createClient({
-  host: "editor-redis-service",
-  port: 6379,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 })
 app.use(json())
 app.use(cors())
