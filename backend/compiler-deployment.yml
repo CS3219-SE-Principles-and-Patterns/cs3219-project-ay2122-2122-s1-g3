@@ -5,7 +5,7 @@ metadata:
   labels:
     app: compiler-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: compiler-deployment
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: compiler-deployment
-        image: geniaaz/peerprep_backend_compiler:latest
+        image: geniaaz/peerprep_backend_compiler:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
