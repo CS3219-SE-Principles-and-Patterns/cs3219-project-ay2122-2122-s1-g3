@@ -27,7 +27,7 @@ function Login(props) {
       return;
     }
     axios
-      .post("http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/auth/signin", {
+      .post(process.env.SIGN_IN_URL, {
         email: email.value,
         password: password.value,
       })

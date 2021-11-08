@@ -43,7 +43,7 @@ function Profile(props) {
     }
     axios
       .put(
-        `http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/users/updatePassword/${id}`,
+        `${process.env.USER_MANAGEMENT_URL}/users/updatePassword/${id}`,
         { password: newPassword.value },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -61,7 +61,7 @@ function Profile(props) {
 
   // retrieve user data
   axios
-    .get(`http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/users/getSingleUser/${id}`, {
+    .get(`${process.env.USER_MANAGEMENT_URL}/users/getSingleUser/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {

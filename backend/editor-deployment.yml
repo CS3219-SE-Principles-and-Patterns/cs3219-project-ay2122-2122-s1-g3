@@ -17,7 +17,7 @@ spec:
       containers:
       - name: editor-deployment
       #TODO: confirm image with Niaaz
-        image: geniaaz/peerprep_backend_editor:1.0.0
+        image: asia.gcr.io/peerprep-3219/peerprep_backend_editor:1.0.9
         imagePullPolicy: Always
         ports:
         - containerPort: 3002

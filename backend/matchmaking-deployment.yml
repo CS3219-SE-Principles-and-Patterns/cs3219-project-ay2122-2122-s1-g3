@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: matchmaking-deployment
-        image: geniaaz/peerprep_backend_matchmaking:1.0.2
+        image: asia.gcr.io/peerprep-3219/peerprep_backend_matchmaking_service:1.0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 8099
