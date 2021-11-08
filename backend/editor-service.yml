@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: editor-deployment
-  type: ClusterIP
+  type: LoadBalancer
   ports:
    -  protocol: TCP
       # Listens on port 3002, forwards request to editor deployment's port 3002

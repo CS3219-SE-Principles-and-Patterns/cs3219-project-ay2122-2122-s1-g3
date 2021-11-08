@@ -5,7 +5,7 @@ metadata:
   labels:
     app: matchmaking-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: matchmaking-deployment
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: matchmaking-deployment
-        image: geniaaz/peerprep_backend_matchmaking:latest
+        image: geniaaz/peerprep_backend_matchmaking:1.0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 8099
