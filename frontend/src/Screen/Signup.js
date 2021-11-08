@@ -47,7 +47,7 @@ function Signup(props) {
       return;
     }
     axios
-      .post(process.env.SIGN_UP_URL || "http://localhost:4000/auth/signup", {
+      .post("http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/auth/signup", {
         email: email.value,
         password: password.value,
         username: username.value,
@@ -55,13 +55,10 @@ function Signup(props) {
       .then((response) => {
         setLoading(false);
         axios
-          .post(
-            process.env.SIGN_IN_URL || "http://localhost:4000/auth/signin",
-            {
-              email: email.value,
-              password: password.value,
-            }
-          )
+          .post("http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/auth/signin", {
+            email: email.value,
+            password: password.value,
+          })
           .then((response) => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);

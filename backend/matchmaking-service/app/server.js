@@ -7,9 +7,12 @@ const port = config.port;
 const cors = require('cors')
 var url_router = require('./controllers/urls');
 var properties = require('./properties');
+const { appendFile } = require('fs');
 
 server = express();
-server.use(cors())
+server.use(cors({
+  origin: "*"
+}))
 server.use(bodyParser.json());
 server.use('/', url_router(properties));
 server.use(function (err, req, res, next) {
