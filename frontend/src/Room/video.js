@@ -35,7 +35,7 @@ export const Video = (props) => {
   const {roomId, setVideoSocket} = props;
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    socket = io(process.env.VIDEO_URL, {
+    socket = io("http://34.93.88.128:3001/", {
       transports: ["websocket"],
     });
     setVideoSocket(socket)

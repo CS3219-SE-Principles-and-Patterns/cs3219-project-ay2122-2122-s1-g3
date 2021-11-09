@@ -17,17 +17,17 @@ function Login(props) {
       setError("Please enter your email.");
       return;
     }
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(email.value)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
+    // let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // if (!re.test(email.value)) {
+    //   setError("Please enter a valid email address.");
+    //   return;
+    // }
     if (password.value === "") {
       setError("Please enter your password.");
       return;
     }
     axios
-      .post(process.env.SIGN_IN_URL, {
+      .post("http://34.93.203.56:4000/auth/signin", {
         email: email.value,
         password: password.value,
       })

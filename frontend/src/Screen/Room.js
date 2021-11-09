@@ -12,7 +12,7 @@ export const Room = (props) => {
     if (videoSocket) {
       videoSocket.disconnect()
     }
-    window.location.href = "/login"
+    window.location.href = "/home"
   };
   return (
     <div className="Room">

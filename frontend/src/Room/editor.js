@@ -32,7 +32,11 @@ export const Editor = (props) => {
     // widget.onclick = () => bookMark.clear()
     // console.log(editor.getAllMarks())
 
-    socket = io(process.env.EDITOR_URL, {
+    // socket = io(process.env.EDITOR_URL, {
+    //   transports: ["websocket"],
+    // });
+
+    socket = io("http://35.244.49.105:3002/", {
       transports: ["websocket"],
     });
 
@@ -86,7 +90,7 @@ export const Editor = (props) => {
     console.log(payload);
     try {
       setStdOut("");
-      const { data } = await axios.post(process.env.COMPILER_URL, payload);
+      const { data } = await axios.post("http://34.93.87.89:5000/run", payload);
       setStdOut(data.output);
     } catch ({ response }) {
       const errMsg = response.data.err.stderr;

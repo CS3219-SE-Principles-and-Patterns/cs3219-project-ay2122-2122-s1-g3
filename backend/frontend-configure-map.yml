@@ -1,15 +1,15 @@
 apiVersion: v1
 data:
   # TODO: Not sure if need port
-  SIGN_UP_URL: "http://34.93.203.56:4000/auth/signup"
-  SIGN_IN_URL: "http://34.93.203.56:4000/auth/signin"
-  MATCHMAKING_UPDATE_URL: "http://matchmaking-service:8099/update"
-  MATCHMAKING_START_URL: "http://matchmaking-service:8099/start"
-  MATCHMAKING_STATUS_URL: "http://matchmaking-service:8099/status"
-  EDITOR_URL: "http://editor-service:3002/"
-  COMPILER_URL: "http://compiler-service:5000/run"
-  VIDEO_URL: "http://video-service:3001/"
-  USER_MANAGEMENT_URL: "http://34.93.203.56:4000/"
+  SIGN_UP_URL: "http://user-management-service.default.svc.cluster.local:4000/auth/signup"
+  SIGN_IN_URL: "http://user-management-service.default.svc.cluster.local:4000/auth/signin"
+  USER_MANAGEMENT_URL: "http://user-management-service.default.svc.cluster.local:4000/"
+  MATCHMAKING_UPDATE_URL: "http://matchmaking-service.default.svc.cluster.local:8099/update"
+  MATCHMAKING_START_URL: "http://matchmaking-service.default.svc.cluster.local:8099/start"
+  MATCHMAKING_STATUS_URL: "http://matchmaking-service.default.svc.cluster.local:8099/status"
+  EDITOR_URL: "http://editor-service.default.svc.cluster.local:3002/"
+  COMPILER_URL: "http://compiler-service.default.svc.cluster.local:5000/run"
+  VIDEO_URL: "http://video-service.default.svc.cluster.local:3001/"
 kind: ConfigMap
 metadata:
   name: frontend-configure-map

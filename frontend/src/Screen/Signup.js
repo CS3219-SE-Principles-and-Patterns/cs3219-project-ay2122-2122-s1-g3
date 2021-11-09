@@ -47,7 +47,7 @@ function Signup(props) {
       return;
     }
     axios
-      .post(process.env.SIGN_UP_URL, {
+      .post("http://34.93.203.56:4000/auth/signup", {
         email: email.value,
         password: password.value,
         username: username.value,
@@ -55,7 +55,7 @@ function Signup(props) {
       .then((response) => {
         setLoading(false);
         axios
-          .post(process.env.SIGN_IN_URL, {
+          .post("http://34.93.203.56:4000/auth/signin", {
             email: email.value,
             password: password.value,
           })
