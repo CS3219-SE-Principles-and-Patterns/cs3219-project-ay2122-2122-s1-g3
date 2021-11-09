@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, NavLink } from "react-router-dom";
+import { Redirect, BrowserRouter, Switch, NavLink } from "react-router-dom";
 
 import Home from "./Screen/Home";
 import Login from "./Screen/Login";
@@ -37,6 +37,7 @@ function App() {
           </div> */}
           <div className="content">
             <Switch>
+              <Redirect exact from="/" to="/login" />
               <PublicRoute path="/login" component={Login} />
               <PublicRoute path="/signup" component={Signup} />
               <PrivateRoute path="/home" component={Home} />
