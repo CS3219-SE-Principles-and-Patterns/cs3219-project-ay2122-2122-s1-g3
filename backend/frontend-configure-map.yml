@@ -3,6 +3,7 @@ data:
   # TODO: Not sure if need port
   SIGN_UP_URL: "http://user-management-service.default.svc.cluster.local:4000/auth/signup"
   SIGN_IN_URL: "http://user-management-service.default.svc.cluster.local:4000/auth/signin"
+  USER_MANAGEMENT_URL: "http://user-management-service.default.svc.cluster.local:4000/"
   MATCHMAKING_UPDATE_URL: "http://matchmaking-service.default.svc.cluster.local:8099/update"
   MATCHMAKING_START_URL: "http://matchmaking-service.default.svc.cluster.local:8099/start"
   MATCHMAKING_STATUS_URL: "http://matchmaking-service.default.svc.cluster.local:8099/status"

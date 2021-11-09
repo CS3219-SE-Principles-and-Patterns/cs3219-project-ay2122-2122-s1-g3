@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: matchmaking-deployment
-  type: ClusterIP
+  type: LoadBalancer
   ports:
    -  protocol: TCP
       # Listens on port 8099, forwards request to video deployment's port 8099

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: frontend-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: frontend-deployment
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend-deployment
-        image: geniaaz/peerprep_frontend:latest
+        image: asia.gcr.io/peerprep-3219/peerprep_frontend:1.1.6
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
@@ -61,4 +61,9 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: VIDEO_URL
+              name: frontend-configure-map
+        - name: USER_MANAGEMENT_URL
+          valueFrom:
+            configMapKeyRef:
+              key: USER_MANAGEMENT_URL
               name: frontend-configure-map

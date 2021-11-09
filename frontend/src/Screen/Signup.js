@@ -47,24 +47,18 @@ function Signup(props) {
       return;
     }
     axios
-      .post(
-        "http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/auth/signup",
-        {
-          email: email.value,
-          password: password.value,
-          username: username.value,
-        }
-      )
+      .post("http://34.93.203.56:4000/auth/signup", {
+        email: email.value,
+        password: password.value,
+        username: username.value,
+      })
       .then((response) => {
         setLoading(false);
         axios
-          .post(
-            "http://adf7c98f9e4cc45dba1fb04c714879ed-1924462951.ap-northeast-3.elb.amazonaws.com:4000/auth/signin",
-            {
-              email: email.value,
-              password: password.value,
-            }
-          )
+          .post("http://34.93.203.56:4000/auth/signin", {
+            email: email.value,
+            password: password.value,
+          })
           .then((response) => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);

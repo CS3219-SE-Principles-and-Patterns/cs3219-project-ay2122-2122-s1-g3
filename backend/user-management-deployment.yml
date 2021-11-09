@@ -5,7 +5,7 @@ metadata:
   labels:
     app: user-management
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: user-management
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-management
-        image: geniaaz/peerprep_user_management:latest
+        image: asia.gcr.io/peerprep-3219/peerprep_backend_user_management:1.0.2
         ports:
         - containerPort: 4000
         env:
