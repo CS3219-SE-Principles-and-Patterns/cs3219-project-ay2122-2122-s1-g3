@@ -4,7 +4,7 @@
 This is a microservice project that is hosted on GCP using Google Kubernetes Engine.
 
 ## Using the app
-Please use Google chrome to test this app. Before you start testing this app, **plase make the following temporary changes to Chrome**. This is to ensure that Chrome is allowed to use the camera and audio on your laptop even though the website is using a HTTP Protocol.
+Please use Google chrome to test this app. Before you start testing this app, **please make the following temporary changes to Chrome**. This is to ensure that Chrome is allowed to use the camera and audio on your laptop even though the website is using a HTTP Protocol.
 
 - Copy and paste `chrome://flags/#unsafely-treat-insecure-origin-as-secure` into your Chrome URL, and press Enter
 - In the section labeled 'Insecure origins treated as secure', paste `http://34.93.229.197` inside the textbox. Ensure that the dropdown on the right is currently `Enabled`
