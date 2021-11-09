@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="header">
+          {/* <div className="header">
             <NavLink activeClassName="active" to="/login">
               Login
             </NavLink>
@@ -34,7 +34,7 @@ function App() {
               Profile
             </NavLink>
             <button onClick={removeUserSession}>Logout</button>
-          </div>
+          </div> */}
           <div className="content">
             <Switch>
               <PublicRoute path="/login" component={Login} />

@@ -14,12 +14,11 @@ const io = require("socket.io")(server, {
 	}
 })
 app.use(cors())
-const client = createClient({
-  host: "video-redis-service",
-  port: 6379,
-})
-client.on("error", console.error);
-client
+const redisClient = createClient({
+  url: `redis://${process.env.REDIS_HOST}:6379`
+});
+redisClient.on("error", console.error);
+redisClient
   .connect()
   .then(() => console.log("Connected to redis locally!"))
   .catch(() => {
@@ -30,12 +29,12 @@ io.on("connection", (socket) => {
   socket.emit("me", socket.id);
 
   socket.on("CONNECTED_TO_VIDEO_ROOM", async ({ roomId, username }) => {
-    await client.lPush(
+    await redisClient.lPush(
       `${roomId}:video:users`,
       JSON.stringify( {name: username, socketID: socket.id })
     );
-    await client.hSet(`video:${socket.id}`, { roomId, username });
-    const users = await client.lRange(`${roomId}:video:users`, 0, -1);
+    await redisClient.hSet(`video:${socket.id}`, { roomId, username });
+    const users = await redisClient.lRange(`${roomId}:video:users`, 0, -1);
     console.log(users)
     const roomName = `ROOM:VIDEO:${roomId}`;
     socket.join(roomName);
@@ -45,23 +44,23 @@ io.on("connection", (socket) => {
   socket.on("disconnect", async () => {
     // Not sure about the line below
     socket.broadcast.emit("partnerLeft");
-    const { roomId, username } = await client.hGetAll(`video:${socket.id}`);
+    const { roomId, username } = await redisClient.hGetAll(`video:${socket.id}`);
     const roomName = `ROOM:VIDEO:${roomId}`;
     io.in(roomName).emit("callEnded");
-    const users = await client.lRange(`${roomId}:video:users`, 0, -1);
+    const users = await redisClient.lRange(`${roomId}:video:users`, 0, -1);
     const newUsers = users.filter((user) => socket.id !== JSON.parse(user).socketID);
     if (newUsers.length) {
-      await client.del(`${roomId}:video:users`);
-      await client.lPush(`${roomId}:video:users`, newUsers);
+      await redisClient.del(`${roomId}:video:users`);
+      await redisClient.lPush(`${roomId}:video:users`, newUsers);
     } else {
-      await client.del(`${roomId}:video:users`);
+      await redisClient.del(`${roomId}:video:users`);
     }
     console.log(newUsers)
 
   });
 
   socket.on("callEnded", async () => {
-    const { roomId, username } = await client.hGetAll(`video:${socket.id}`);
+    const { roomId, username } = await redisClient.hGetAll(`video:${socket.id}`);
     const roomName = `ROOM:VIDEO:${roomId}`;
     io.in(roomName).emit("callEnded");
   })
