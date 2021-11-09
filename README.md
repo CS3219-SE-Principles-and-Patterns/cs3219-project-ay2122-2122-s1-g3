@@ -13,7 +13,7 @@ Please use Google chrome to test this app. Before you start testing this app, **
 After doing the above procedures, kindly access the web app through the link http://34.93.229.197/.
 
 ## Setting up Kubernetes Cluster locally
-As we are unable to share our GCP key, we will provide the steps for you to setup this same kubernetes cluster on your local machine. This steps can be replicated with any kubernetes cluster that you are currently connected to (including minikube, aws, gke, etc.)
+As we are unable to share our GCP key, we will provide the steps for you to setup this same kubernetes cluster on your local machine. This steps can be replicated with any kubernetes cluster that you are currently connected to (including minikube, aws eks, gke, etc.)
 
 1. Ensure that you have kubectl installed on your command line
 2. Do check which cluster your kubectl is currently connected to. If there is no cluster, you cab first connect to a minikube cluster and continue with the following steps.
@@ -44,4 +44,4 @@ As we are unable to share our GCP key, we will provide the steps for you to setu
 27. Run `kubectl apply -f video-service.yml`
 
 
-After all the deployments are setup, run `kubectl get svc`, and get the External IP of the frontend service. It should be accessible and should lead to the web app
+After all the deployments are setup, run `kubectl get svc`, and get the External IP of the frontend service. It should be accessible and should lead you to the web app directly. If you are running this on your minikube local cluster, then the external IP given to you may not be accessible due to an issue with minikube.
